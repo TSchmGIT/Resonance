@@ -1,0 +1,25 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Echo_Shard.name",
+    "Description": "items.Echo_Shard.description"
+  },
+  "Categories": [
+    "Blocks.Ores"
+  ],
+  "Icon": "Icons/ItemsGenerated/Echo_Shard.png",
+  "Model": "Items/Echo_Shard/Echo_Shard.blockymodel",
+  "Texture": "Items/Echo_Shard/Echo_Shard.png",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Ore"
+    ]
+  },
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "MaxStack": 25,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "DropOnDeath": true
+}

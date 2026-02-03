@@ -1,0 +1,12 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Echo_Wand.name",
+    "Description": "items.Echo_Wand.description"
+  },
+  "Icon": "Icons/ItemsGenerated/Echo_Wand.png",
+  "Model": "Items/Echo_Wand/Echo_Wand.blockymodel",
+  "Texture": "Items/Echo_Wand/Echo_Wand.png",
+  "PlayerAnimationsId": "Item",
+  "MaxStack": 1,
+  "DropOnDeath": true
+}

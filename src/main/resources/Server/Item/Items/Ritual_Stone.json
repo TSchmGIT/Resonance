@@ -1,0 +1,80 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Ritual_Stone.name",
+    "Description": "items.Ritual_Stone.description"
+  },
+  "PlayerAnimationsId": "Block",
+  "Icon": "Icons/ItemsGenerated/Ritual_Stone.png",
+  "Recipe": {
+    "TimeSeconds": 3,
+    "Input": [
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 8
+      },
+      {
+        "ResourceTypeId": "Rock_Stone",
+        "Quantity": 10
+      },
+      {
+        "ResourceTypeId": "Rock",
+        "Quantity": 5
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Workbench_Crafting"
+        ],
+        "Id": "Workbench"
+      }
+    ]
+  },
+  "BlockType": {
+    "Material": "Solid",
+    "DrawType": "Model",
+    "CustomModel": "Blocks/Ritual_Stone/Ritual_Stone.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Ritual_Stone/Ritual_Stone.png",
+        "Weight": 1
+      }
+    ],
+    "Flags": {
+      "IsUsable": true
+    },
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "HitboxType": "Ritual_Stone",
+    "VariantRotation": "NESW",
+    "BlockEntity": {
+      "Components": {
+        "Resonance_RitualStone": {}
+      }
+    },
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "ritual_stone_interaction"
+          }
+        ]
+      }
+    },
+    "Bench": {
+      "Id": "Ritual_Stone",
+      "Type": "Crafting",
+      "Categories": [
+        {
+          "Id": "Echo_Items",
+          "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
+          "Name": "Echo Items"
+        }
+      ]
+    }
+  }
+}

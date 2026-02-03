@@ -1,0 +1,10 @@
+Test_Pipe.name = Test Pipe
+Test_Pipe.description = A pipe to test models in Hytale
+Ritual_Stone.name = Ritual Stone
+Ritual_Stone.description = A magic stone used for mysterious rituals
+Echo_Stone.name = Echo Stone
+Echo_Stone.description = A stone which contains remnants of echos
+Echo_Shard.name = Echo Shard
+Echo_Shard.description = Fragment of long forgotten echos
+Echo_DummyItem.name = Echo Dummy Item
+Echo_DummyItem.description = A test dev item to test things out. Useless.

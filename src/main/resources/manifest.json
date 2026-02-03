@@ -1,0 +1,19 @@
+{
+  "Group": "tschm",
+  "Name": "Resonance",
+  "Version": "${version}",
+  "Description": "Mystical fantasy automation mod",
+  "Authors": [
+    {
+      "Name": "tschm"
+    }
+  ],
+  "ServerVersion": "*",
+  "Dependencies": {
+    "Hytale:EntityModule": "*"
+  },
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "IncludesAssetPack": true,
+  "Main": "com.tschm.resonance.Resonance"
+}

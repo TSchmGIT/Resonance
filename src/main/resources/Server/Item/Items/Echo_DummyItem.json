@@ -1,0 +1,51 @@
+{
+  "TranslationProperties": {
+    "Name": "items.Echo_DummyItem.name",
+    "Description": "items.Echo_DummyItem.description"
+  },
+  "Categories": [
+    "Blocks.Ores"
+  ],
+  "Recipe": {
+    "TimeSeconds": 3,
+    "Input": [
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Rock_Stone",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Rock",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Categories": [
+          "Echo_Items"
+        ],
+        "Id": "Ritual_Stone"
+      }
+    ]
+  },
+  "Icon": "Icons/ItemsGenerated/Echo_Shard.png",
+  "Model": "Items/Echo_Shard/Echo_Shard.blockymodel",
+  "Texture": "Items/Echo_Shard/Echo_Shard.png",
+  "ItemLevel": 10,
+  "PlayerAnimationsId": "Block",
+  "Tags": {
+    "Type": [
+      "Ore"
+    ]
+  },
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "MaxStack": 25,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "DropOnDeath": true
+}
