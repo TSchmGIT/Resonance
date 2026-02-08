@@ -1,7 +1,6 @@
 package com.tschm.resonance.util;
 
 import com.google.common.flogger.StackSize;
-import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.Message;
 import com.hypixel.hytale.server.core.universe.Universe;
 import com.tschm.resonance.Resonance;

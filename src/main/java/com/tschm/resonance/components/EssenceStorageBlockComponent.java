@@ -21,7 +21,6 @@ public final class EssenceStorageBlockComponent extends AbstractEssenceStorage i
     }
 
     public EssenceStorageBlockComponent() {
-        DebugHelper.Print("EssenceStorageBlockComponent created");
     }
 
     public EssenceStorageBlockComponent(long essenceStored, long maxEssence, long maxReceive, long maxExtract) {

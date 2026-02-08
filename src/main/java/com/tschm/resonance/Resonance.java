@@ -32,14 +32,15 @@ public class Resonance extends JavaPlugin {
 
         this.getEventRegistry().registerGlobal(EventPriority.NORMAL, ChunkPreLoadProcessEvent.class, OreGenChunkEvent::onChunkPreLoadProcess);
 
-        // Components
         var regChunk = this.getChunkStoreRegistry();
+        var regEntity = this.getEntityStoreRegistry();
+
+        // Components
         RitualStoneComponent.setComponentType(regChunk.registerComponent(RitualStoneComponent.class, "Resonance_RitualStone", RitualStoneComponent.CODEC));
         EssenceStorageBlockComponent.setComponentType(regChunk.registerComponent(EssenceStorageBlockComponent.class, "Resonance_EssenceStorage", EssenceStorageBlockComponent.CODEC));
         EssenceStorageVisualizerComponent.setComponentType(regChunk.registerComponent(EssenceStorageVisualizerComponent.class, "Resonance_EssenceStorageVisualizer", EssenceStorageVisualizerComponent.CODEC));
         EssenceGeneratorComponent.setComponentType(regChunk.registerComponent(EssenceGeneratorComponent.class, "Resonance_EssenceGenerator", EssenceGeneratorComponent.CODEC));
 
-        var regEntity = this.getEntityStoreRegistry();
         EssenceStorageEntityComponent.setComponentType(regEntity.registerComponent(EssenceStorageEntityComponent.class, "Resonance_EssenceStorage", EssenceStorageEntityComponent.CODEC));
 
         // Systems

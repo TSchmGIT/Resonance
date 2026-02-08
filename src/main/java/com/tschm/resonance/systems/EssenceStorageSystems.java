@@ -10,6 +10,7 @@ import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.event.events.ecs.PlaceBlockEvent;
+import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
@@ -33,6 +34,11 @@ public class EssenceStorageSystems {
 
         @Override
         public void handle(int i, @NonNullDecl ArchetypeChunk<EntityStore> archetypeChunk, @NonNullDecl Store<EntityStore> store, @NonNullDecl CommandBuffer<EntityStore> commandBuffer, @NonNullDecl PlaceBlockEvent placeBlockEvent) {
+            ItemStack itemStack = placeBlockEvent.getItemInHand();
+            String itemId = itemStack != null ? itemStack.getItemId() : "";
+            if (!itemId.equals("Resonance_Vessel"))
+                return;
+
             World world = commandBuffer.getExternalData().getWorld();
             Vector3i targetPos = placeBlockEvent.getTargetBlock();
             commandBuffer.run(entityStore -> {
