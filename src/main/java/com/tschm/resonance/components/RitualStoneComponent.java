@@ -22,9 +22,6 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public class RitualStoneComponent implements Component<ChunkStore> {
-
-    private static ComponentType<ChunkStore, RitualStoneComponent> type;
-
     public enum Slot {
         MAIN(1),
         CATALYST_1(2),
@@ -50,15 +47,14 @@ public class RitualStoneComponent implements Component<ChunkStore> {
         }
     }
 
+    public static final BuilderCodec CODEC;
+    private static ComponentType<ChunkStore, RitualStoneComponent> type;
     public static ComponentType<ChunkStore, RitualStoneComponent> getComponentType() {
         return type;
     }
-
     public static void setComponentType(ComponentType<ChunkStore, RitualStoneComponent> type) {
         RitualStoneComponent.type = type;
     }
-
-    public static final BuilderCodec CODEC;
 
     @Nullable
     private ItemStack mainInput;

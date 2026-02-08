@@ -11,11 +11,12 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class ComponentHelper {
     @Nullable
-    public static <T extends Component<ChunkStore>> T findChunkComponentAt(World world, Vector3i pos, ComponentType<ChunkStore, T> componentType) {
+    public static <T extends Component<ChunkStore>> T findChunkComponentAt(@Nonnull World world, Vector3i pos, ComponentType<ChunkStore, T> componentType) {
         int x = pos.x;
         int y = pos.y;
         int z = pos.z;
@@ -32,6 +33,9 @@ public class ComponentHelper {
         if (chunkRef == null) {
             chunkRef = BlockModule.ensureBlockEntity(worldChunk, x, y, z);
         }
+
+        if (chunkRef == null)
+            return null;
 
         // Retrieve component from chunk store
         Store<ChunkStore> chunkStore = world.getChunkStore().getStore();
