@@ -1,0 +1,117 @@
+{
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 1000
+        },
+        "Resonance_EssenceStorageVisualizer": {},
+        "Resonance_EssenceGenerator": {
+          "ProductionPerTick": 2
+        }
+      }
+    },
+    "CustomModel": "Blocks/Resonant_Vessel/Resonant_Vessel.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Resonant_Vessel/Resonant_Vessel_0.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Flags": {
+      "IsUsable": true
+    },
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "essence_storage_clear"
+          }
+        ]
+      }
+    },
+    "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Lvl0": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Resonant_Vessel/Resonant_Vessel_0.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Lvl1": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Resonant_Vessel/Resonant_Vessel_1.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Lvl2": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Resonant_Vessel/Resonant_Vessel_2.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Lvl3": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Resonant_Vessel/Resonant_Vessel_3.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "Lvl4": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Resonant_Vessel/Resonant_Vessel_4.png",
+              "Weight": 1
+            }
+          ]
+        }
+      }
+    },
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Resonant_Vessel.png",
+  "PlayerAnimationsId": "Block",
+  "Recipe": {
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Storage"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ],
+    "Input": [
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 1
+      },
+      {
+        "Quantity": 1,
+        "ResourceTypeId": "Rock"
+      }
+    ]
+  },
+  "TranslationProperties": {
+    "Description": "items.Resonant_Vessel.description",
+    "Name": "items.Resonant_Vessel.name"
+  }
+}

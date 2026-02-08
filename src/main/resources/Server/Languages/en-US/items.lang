@@ -8,3 +8,5 @@ Echo_Shard.name = Echo Shard
 Echo_Shard.description = Fragment of long forgotten echos
 Echo_DummyItem.name = Echo Dummy Item
 Echo_DummyItem.description = A test dev item to test things out. Useless.
+Resonant_Vessel.name = Resonant Vessel
+Resonant_Vessel.description = Stores Resonant Essence

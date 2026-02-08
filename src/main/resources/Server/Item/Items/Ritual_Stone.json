@@ -23,11 +23,11 @@
     ],
     "BenchRequirement": [
       {
-        "Type": "Crafting",
         "Categories": [
           "Workbench_Crafting"
         ],
-        "Id": "Workbench"
+        "Id": "Workbench",
+        "Type": "Crafting"
       }
     ]
   },
@@ -73,6 +73,11 @@
           "Id": "Echo_Items",
           "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
           "Name": "Echo Items"
+        },
+        {
+          "Id": "Echo_Storage",
+          "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
+          "Name": "Echo Storage"
         }
       ]
     }
