@@ -9,6 +9,7 @@ import com.hypixel.hytale.server.core.universe.world.events.ChunkPreLoadProcessE
 import com.tschm.resonance.components.*;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
+import com.tschm.resonance.systems.EchoWandSystems;
 import com.tschm.resonance.systems.EssenceGeneratorSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
 import com.tschm.resonance.systems.RitualStoneSystems;
@@ -46,6 +47,7 @@ public class Resonance extends JavaPlugin {
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
         regEntity.registerSystem(new EssenceStorageSystems.VisualizerPlacedChunk());
+        regEntity.registerSystem(new EchoWandSystems.HUDManager());
 
         regChunk.registerSystem(new EssenceGeneratorSystems.GeneratorTicks());
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageVisualizerSystem());

@@ -1,9 +1,6 @@
 package com.tschm.resonance.systems;
 
-import com.hypixel.hytale.component.ArchetypeChunk;
-import com.hypixel.hytale.component.CommandBuffer;
-import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
@@ -26,7 +23,7 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class EssenceStorageSystems {
-
+    // Event system to initialize the properties of the visualizer component
     public static class VisualizerPlacedChunk extends EntityEventSystem<EntityStore, PlaceBlockEvent> {
         public VisualizerPlacedChunk() {
             super(PlaceBlockEvent.class);
@@ -36,13 +33,14 @@ public class EssenceStorageSystems {
         public void handle(int i, @NonNullDecl ArchetypeChunk<EntityStore> archetypeChunk, @NonNullDecl Store<EntityStore> store, @NonNullDecl CommandBuffer<EntityStore> commandBuffer, @NonNullDecl PlaceBlockEvent placeBlockEvent) {
             ItemStack itemStack = placeBlockEvent.getItemInHand();
             String itemId = itemStack != null ? itemStack.getItemId() : "";
-            if (!itemId.equals("Resonance_Vessel"))
+            if (!itemId.equals("Resonant_Vessel")){
                 return;
+            }
 
             World world = commandBuffer.getExternalData().getWorld();
             Vector3i targetPos = placeBlockEvent.getTargetBlock();
             commandBuffer.run(entityStore -> {
-                var compVisualizer = ComponentHelper.findChunkComponentAt(world, targetPos, EssenceStorageVisualizerComponent.getComponentType());
+                var compVisualizer = ComponentHelper.findComponentAt(world, targetPos, EssenceStorageVisualizerComponent.getComponentType());
                 if (compVisualizer == null){
                     DebugHelper.Print("Position NOT set!");
                     return;
@@ -58,6 +56,7 @@ public class EssenceStorageSystems {
         }
     }
 
+    // Updates the block state of the visualizer
     public static class EssenceStorageVisualizerSystem extends EntityTickingSystem<ChunkStore> {
 
         // The amount of levels possible in the visual representation
@@ -136,7 +135,7 @@ public class EssenceStorageSystems {
                 worldChunk.setBlock(targetBlock.x, targetBlock.y, targetBlock.z, newBlockId, newBlockType, rotation, 0, settings);
 
                 World world = commandBuffer.getExternalData().getWorld();
-                EssenceStorageVisualizerComponent compStorageNew = ComponentHelper.findChunkComponentAt(world, targetBlock, EssenceStorageVisualizerComponent.getComponentType());
+                EssenceStorageVisualizerComponent compStorageNew = ComponentHelper.findComponentAt(world, targetBlock, EssenceStorageVisualizerComponent.getComponentType());
                 if (compStorageNew != null)
                     compStorageNew.setPosition(targetBlock);
             });

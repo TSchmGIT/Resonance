@@ -27,8 +27,9 @@ public class EssenceStorageVisualizerComponent implements Component<ChunkStore> 
     public EssenceStorageVisualizerComponent() {
     }
 
-    public EssenceStorageVisualizerComponent(Vector3i position) {
+    public EssenceStorageVisualizerComponent(Vector3i position, int currentLevel) {
         this.position = position;
+        this.currentLevel = currentLevel;
     }
 
     public Vector3i getPosition() {
@@ -49,7 +50,7 @@ public class EssenceStorageVisualizerComponent implements Component<ChunkStore> 
 
     @Override
     public Component<ChunkStore> clone() {
-        return new EssenceStorageVisualizerComponent(this.position);
+        return new EssenceStorageVisualizerComponent(this.position, this.currentLevel);
     }
 
     static {

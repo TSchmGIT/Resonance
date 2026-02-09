@@ -32,7 +32,7 @@ public class ClearEssenceInteraction extends SimpleBlockInteraction {
                                      @Nonnull InteractionType type, @Nonnull InteractionContext context,
                                      @Nullable ItemStack itemStack, @Nonnull Vector3i targetBlock,
                                      @Nonnull CooldownHandler cooldownHandler) {
-        EssenceStorageBlockComponent compStorage = ComponentHelper.findChunkComponentAt(world, targetBlock, EssenceStorageBlockComponent.getComponentType());
+        EssenceStorageBlockComponent compStorage = ComponentHelper.findComponentAt(commandBuffer.getExternalData().getWorld(), targetBlock, EssenceStorageBlockComponent.getComponentType());
         if (compStorage == null) {
             context.getState().state = InteractionState.Failed;
             return;

@@ -3,11 +3,11 @@
     "BlockEntity": {
       "Components": {
         "Resonance_EssenceStorage": {
-          "MaxEssence": 1000
+          "MaxEssence": 1000000
         },
         "Resonance_EssenceStorageVisualizer": {},
         "Resonance_EssenceGenerator": {
-          "ProductionPerTick": 2
+          "ProductionPerTick": 1
         }
       }
     },

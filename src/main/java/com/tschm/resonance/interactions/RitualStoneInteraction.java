@@ -45,7 +45,7 @@ public class RitualStoneInteraction extends SimpleBlockInteraction {
                                      @Nonnull InteractionType type, @Nonnull InteractionContext context,
                                      @Nullable ItemStack itemStack, @Nonnull Vector3i targetBlock,
                                      @Nonnull CooldownHandler cooldownHandler) {
-        RitualStoneComponent ritualStoneComponent = ComponentHelper.findChunkComponentAt(world, targetBlock, RitualStoneComponent.getComponentType());
+        RitualStoneComponent ritualStoneComponent = ComponentHelper.findComponentAt(world, targetBlock, RitualStoneComponent.getComponentType());
         if (ritualStoneComponent == null) {
             context.getState().state = InteractionState.Failed;
             return;

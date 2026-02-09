@@ -1,0 +1,49 @@
+// ResonanceHudBlockIndicator.ui
+$C = "../Common.ui";
+
+// A small HUD element that sits above the hotbar.
+// Shows block name + "current/max RE" and a visual fill bar.
+
+Group #ResonanceHudBlockIndicator {
+  // Stretch full width; place near bottom. Tune Bottom to sit nicely above the hotbar.
+  Anchor: (Bottom: 160, Height: 64);
+
+  // Center the actual widget within the full-width anchor region.
+  LayoutMode: Center;
+
+  // The centered widget "card"
+  Group #Widget {
+    Anchor: (Width: 420, Height: 64);
+    LayoutMode: Top;
+
+    // Slight translucent backdrop
+    Background: #000000(0.35);
+
+    // Top line: block name
+    Label #BlockName {
+      Anchor: (Left: 12, Right: 12, Top: 8, Height: 20);
+      Style: (...$C.@DefaultLabelStyle, FontSize: 18, HorizontalAlignment: Center, TextColor: #ffffff(0.95),);
+      Text: "Ritual Stone";
+    }
+
+    // Second line: numeric value text
+    Label #ValueText {
+      Anchor: (Left: 12, Right: 12, Top: 0, Height: 16);
+      Style: (...$C.@DefaultLabelStyle, FontSize: 14, HorizontalAlignment: Center, TextColor: #ffffff(0.85));
+      Text: "12541/210000 RE";
+    }
+
+    // Fill bar background
+    Group #BarBackground {
+      Anchor: (Left: 12, Right: 12, Bottom: 10, Height: 10);
+      Background: #000000(0.55);
+
+      // The actual fill.
+      // Default shows ~6% full; your code should update Width based on ratio.
+      Group #Fill {
+        Anchor: (Left: 0, Top: 0, Bottom: 0, Width: 24);
+        Background: #6aa9ff(0.95);
+      }
+    }
+  }
+}
