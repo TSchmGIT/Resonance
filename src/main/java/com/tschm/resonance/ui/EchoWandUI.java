@@ -5,7 +5,7 @@ import com.hypixel.hytale.server.core.ui.Anchor;
 import com.hypixel.hytale.server.core.ui.Value;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.tschm.resonance.components.EssenceStorageBlockComponent;
+import com.tschm.resonance.components.EssenceStorageComponent;
 import com.tschm.resonance.util.HUDProvider;
 
 import javax.annotation.Nonnull;
@@ -32,7 +32,7 @@ public class EchoWandUI extends HUDProvider<EchoWandUI> {
         uiCommandBuilder.setObject("#Fill.Anchor", widthAnchor);
     }
 
-    public void updateHUDContent(EssenceStorageBlockComponent compStorage) {
+    public void updateHUDContent(EssenceStorageComponent compStorage) {
         currentRE = compStorage.getEssenceStored();
         maxRE = compStorage.getMaxEssenceStored();
     }

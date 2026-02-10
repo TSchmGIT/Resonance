@@ -11,7 +11,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.client.SimpleBlockInteraction;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.tschm.resonance.components.EssenceStorageBlockComponent;
+import com.tschm.resonance.components.EssenceStorageComponent;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
@@ -32,7 +32,7 @@ public class ClearEssenceInteraction extends SimpleBlockInteraction {
                                      @Nonnull InteractionType type, @Nonnull InteractionContext context,
                                      @Nullable ItemStack itemStack, @Nonnull Vector3i targetBlock,
                                      @Nonnull CooldownHandler cooldownHandler) {
-        EssenceStorageBlockComponent compStorage = ComponentHelper.findComponentAt(commandBuffer.getExternalData().getWorld(), targetBlock, EssenceStorageBlockComponent.getComponentType());
+        EssenceStorageComponent compStorage = ComponentHelper.findComponentAt(commandBuffer.getExternalData().getWorld(), targetBlock, EssenceStorageComponent.getComponentType());
         if (compStorage == null) {
             context.getState().state = InteractionState.Failed;
             return;

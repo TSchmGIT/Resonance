@@ -14,7 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.tschm.resonance.components.EssenceStorageBlockComponent;
+import com.tschm.resonance.components.EssenceStorageComponent;
 import com.tschm.resonance.components.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
@@ -65,7 +65,7 @@ public class EssenceStorageSystems {
         @Override
         public void tick(float v, int idx, @NonNullDecl ArchetypeChunk<ChunkStore> archetypeChunk, @NonNullDecl Store<ChunkStore> store, @NonNullDecl CommandBuffer<ChunkStore> commandBuffer) {
             EssenceStorageVisualizerComponent compVisualizer = archetypeChunk.getComponent(idx, EssenceStorageVisualizerComponent.getComponentType());
-            EssenceStorageBlockComponent compStorage = archetypeChunk.getComponent(idx, EssenceStorageBlockComponent.getComponentType());
+            EssenceStorageComponent compStorage = archetypeChunk.getComponent(idx, EssenceStorageComponent.getComponentType());
             if (compStorage == null || compVisualizer == null) {
                 DebugHelper.Print("compStorage or compVisualizer null");
                 return;
@@ -144,7 +144,7 @@ public class EssenceStorageSystems {
         @NullableDecl
         @Override
         public Query<ChunkStore> getQuery() {
-            return Query.and(EssenceStorageBlockComponent.getComponentType(), EssenceStorageVisualizerComponent.getComponentType());
+            return Query.and(EssenceStorageComponent.getComponentType(), EssenceStorageVisualizerComponent.getComponentType());
         }
     }
 

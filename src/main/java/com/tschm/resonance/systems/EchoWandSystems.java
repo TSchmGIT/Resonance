@@ -14,7 +14,7 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.TargetUtil;
-import com.tschm.resonance.components.EssenceStorageBlockComponent;
+import com.tschm.resonance.components.EssenceStorageComponent;
 import com.tschm.resonance.ui.EchoWandUI;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
@@ -48,9 +48,9 @@ public class EchoWandSystems {
 
             commandBuffer.run(es -> {
                 boolean showHud = shouldCheckHud;
-                EssenceStorageBlockComponent compStorage = null;
+                EssenceStorageComponent compStorage = null;
                 if (showHud) {
-                    compStorage = ComponentHelper.findComponentAt(commandBuffer.getExternalData().getWorld(), targetPosFinal, EssenceStorageBlockComponent.getComponentType());
+                    compStorage = ComponentHelper.findComponentAt(commandBuffer.getExternalData().getWorld(), targetPosFinal, EssenceStorageComponent.getComponentType());
                     showHud = compStorage != null;
                 }
 

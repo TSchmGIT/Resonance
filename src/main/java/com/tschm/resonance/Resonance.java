@@ -38,11 +38,9 @@ public class Resonance extends JavaPlugin {
 
         // Components
         RitualStoneComponent.setComponentType(regChunk.registerComponent(RitualStoneComponent.class, "Resonance_RitualStone", RitualStoneComponent.CODEC));
-        EssenceStorageBlockComponent.setComponentType(regChunk.registerComponent(EssenceStorageBlockComponent.class, "Resonance_EssenceStorage", EssenceStorageBlockComponent.CODEC));
+        EssenceStorageComponent.setComponentType(regChunk.registerComponent(EssenceStorageComponent.class, "Resonance_EssenceStorage", EssenceStorageComponent.CODEC));
         EssenceStorageVisualizerComponent.setComponentType(regChunk.registerComponent(EssenceStorageVisualizerComponent.class, "Resonance_EssenceStorageVisualizer", EssenceStorageVisualizerComponent.CODEC));
         EssenceGeneratorComponent.setComponentType(regChunk.registerComponent(EssenceGeneratorComponent.class, "Resonance_EssenceGenerator", EssenceGeneratorComponent.CODEC));
-
-        EssenceStorageEntityComponent.setComponentType(regEntity.registerComponent(EssenceStorageEntityComponent.class, "Resonance_EssenceStorage", EssenceStorageEntityComponent.CODEC));
 
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
