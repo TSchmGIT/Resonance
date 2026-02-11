@@ -5,7 +5,7 @@ import com.hypixel.hytale.server.core.ui.Anchor;
 import com.hypixel.hytale.server.core.ui.Value;
 import com.hypixel.hytale.server.core.ui.builder.UICommandBuilder;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
-import com.tschm.resonance.components.EssenceStorageComponent;
+import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.util.HUDProvider;
 
 import javax.annotation.Nonnull;

@@ -1,12 +1,21 @@
 {
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Echo_Wand.png",
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "echo_wand_interaction"
+        }
+      ]
+    }
+  },
+  "MaxStack": 1,
+  "Model": "Items/Echo_Wand/Echo_Wand.blockymodel",
+  "PlayerAnimationsId": "Item",
+  "Texture": "Items/Echo_Wand/Echo_Wand.png",
   "TranslationProperties": {
     "Name": "items.Echo_Wand.name",
     "Description": "items.Echo_Wand.description"
-  },
-  "Icon": "Icons/ItemsGenerated/Echo_Wand.png",
-  "Model": "Items/Echo_Wand/Echo_Wand.blockymodel",
-  "Texture": "Items/Echo_Wand/Echo_Wand.png",
-  "PlayerAnimationsId": "Item",
-  "MaxStack": 1,
-  "DropOnDeath": true
+  }
 }

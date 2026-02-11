@@ -53,7 +53,10 @@
     "VariantRotation": "NESW",
     "BlockEntity": {
       "Components": {
-        "Resonance_RitualStone": {}
+        "Resonance_RitualStone": {},
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 1000
+        }
       }
     },
     "Interactions": {

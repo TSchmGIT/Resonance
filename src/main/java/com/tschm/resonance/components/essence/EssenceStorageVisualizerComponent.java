@@ -1,4 +1,4 @@
-package com.tschm.resonance.components;
+package com.tschm.resonance.components.essence;
 
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;

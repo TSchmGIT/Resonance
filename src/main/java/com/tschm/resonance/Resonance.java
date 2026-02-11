@@ -7,12 +7,15 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.events.ChunkPreLoadProcessEvent;
 import com.tschm.resonance.components.*;
+import com.tschm.resonance.components.essence.EssenceStorageComponent;
+import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
+import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
 import com.tschm.resonance.systems.EchoWandSystems;
-import com.tschm.resonance.systems.EssenceGeneratorSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
 import com.tschm.resonance.systems.RitualStoneSystems;
+import com.tschm.resonance.systems.generators.SolarAttunementStoneSystems;
 
 import javax.annotation.Nonnull;
 
@@ -28,8 +31,10 @@ public class Resonance extends JavaPlugin {
         super.setup();
 
         // Interactions
-        this.getCodecRegistry(Interaction.CODEC).register("ritual_stone_interaction", RitualStoneInteraction.class, RitualStoneInteraction.CODEC);
-        this.getCodecRegistry(Interaction.CODEC).register("essence_storage_clear", ClearEssenceInteraction.class, ClearEssenceInteraction.CODEC);
+        var interactionRegistry = this.getCodecRegistry(Interaction.CODEC);
+        interactionRegistry.register("ritual_stone_interaction", RitualStoneInteraction.class, RitualStoneInteraction.CODEC);
+        interactionRegistry.register("essence_storage_clear", ClearEssenceInteraction.class, ClearEssenceInteraction.CODEC);
+        interactionRegistry.register("echo_wand_interaction", EchoWandInteraction.class, EchoWandInteraction.CODEC);
 
         this.getEventRegistry().registerGlobal(EventPriority.NORMAL, ChunkPreLoadProcessEvent.class, OreGenChunkEvent::onChunkPreLoadProcess);
 
@@ -40,14 +45,15 @@ public class Resonance extends JavaPlugin {
         RitualStoneComponent.setComponentType(regChunk.registerComponent(RitualStoneComponent.class, "Resonance_RitualStone", RitualStoneComponent.CODEC));
         EssenceStorageComponent.setComponentType(regChunk.registerComponent(EssenceStorageComponent.class, "Resonance_EssenceStorage", EssenceStorageComponent.CODEC));
         EssenceStorageVisualizerComponent.setComponentType(regChunk.registerComponent(EssenceStorageVisualizerComponent.class, "Resonance_EssenceStorageVisualizer", EssenceStorageVisualizerComponent.CODEC));
-        EssenceGeneratorComponent.setComponentType(regChunk.registerComponent(EssenceGeneratorComponent.class, "Resonance_EssenceGenerator", EssenceGeneratorComponent.CODEC));
+
+        SolarAttunementStoneComponent.setComponentType(regChunk.registerComponent(SolarAttunementStoneComponent.class, "Resonance_SolarAttunementStoneComponent", SolarAttunementStoneComponent.CODEC));
 
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
         regEntity.registerSystem(new EssenceStorageSystems.VisualizerPlacedChunk());
         regEntity.registerSystem(new EchoWandSystems.HUDManager());
 
-        regChunk.registerSystem(new EssenceGeneratorSystems.GeneratorTicks());
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageVisualizerSystem());
+        regChunk.registerSystem(new SolarAttunementStoneSystems.GeneratorTicks());
     }
 }

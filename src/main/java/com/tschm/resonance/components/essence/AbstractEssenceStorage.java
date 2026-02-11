@@ -1,4 +1,4 @@
-package com.tschm.resonance.essence;
+package com.tschm.resonance.components.essence;
 
 // CREDITS TO killer.Essencestorage mod
 // https://github.com/zkiller/HytaleEssenceStorage

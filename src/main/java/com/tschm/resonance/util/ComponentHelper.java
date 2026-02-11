@@ -14,6 +14,8 @@ import com.hypixel.hytale.server.core.universe.world.WorldProvider;
 import com.hypixel.hytale.server.core.universe.world.chunk.BlockComponentChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
+import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,5 +39,30 @@ public class ComponentHelper {
         final int blockIndexColumn = ChunkUtil.indexBlockInColumn(x, y, z);
         Ref<ChunkStore> ref = blockComponentChunk.getEntityReference(blockIndexColumn);
         return blockComponentChunk.getComponent(blockIndexColumn, componentType);
+    }
+
+    // Work around for inheritance and component types
+    @Nullable
+    public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull World world, Vector3i pos){
+        int x = pos.x;
+        int y = pos.y;
+        int z = pos.z;
+
+        // Retrieve world chunk
+        final long indexChunk = ChunkUtil.indexChunkFromBlock(x, z);
+        WorldChunk worldChunk = world.getChunk(indexChunk);
+        BlockComponentChunk blockComponentChunk = worldChunk != null ? worldChunk.getBlockComponentChunk() : null;
+        if (worldChunk == null || worldChunk.getBlockType(pos) == null || blockComponentChunk == null) {
+            return null;
+        }
+
+        // Retrieve block component entity at given bock position
+        final int blockIndexColumn = ChunkUtil.indexBlockInColumn(x, y, z);
+
+        // Extend with more types in the future
+        EssenceGeneratorComponent comp = null;
+        comp = blockComponentChunk.getComponent(blockIndexColumn, SolarAttunementStoneComponent.getComponentType());
+
+        return comp;
     }
 }

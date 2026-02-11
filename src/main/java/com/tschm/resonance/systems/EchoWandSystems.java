@@ -14,7 +14,7 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.TargetUtil;
-import com.tschm.resonance.components.EssenceStorageComponent;
+import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.ui.EchoWandUI;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;

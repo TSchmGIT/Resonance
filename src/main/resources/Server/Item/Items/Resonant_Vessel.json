@@ -5,10 +5,7 @@
         "Resonance_EssenceStorage": {
           "MaxEssence": 1000000
         },
-        "Resonance_EssenceStorageVisualizer": {},
-        "Resonance_EssenceGenerator": {
-          "ProductionPerTick": 1
-        }
+        "Resonance_EssenceStorageVisualizer": {}
       }
     },
     "CustomModel": "Blocks/Resonant_Vessel/Resonant_Vessel.blockymodel",

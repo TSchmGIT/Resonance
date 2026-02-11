@@ -1,16 +1,19 @@
-package com.tschm.resonance.components;
+package com.tschm.resonance.components.essence;
 
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.validation.Validators;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentType;
+import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
-import com.tschm.resonance.essence.AbstractEssenceStorage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class EssenceStorageComponent extends AbstractEssenceStorage implements Component<ChunkStore> {
 
-    public static final BuilderCodec CODEC;
+    public static final BuilderCodec<EssenceStorageComponent> CODEC;
     private static ComponentType<ChunkStore, EssenceStorageComponent> type;
     public static ComponentType<ChunkStore, EssenceStorageComponent> getComponentType() {
         return type;
@@ -19,11 +22,18 @@ public final class EssenceStorageComponent extends AbstractEssenceStorage implem
         EssenceStorageComponent.type = type;
     }
 
+    // List of block position that send RE to this storage
+    private List<Vector3i> boundSenderList = new ArrayList<Vector3i>();
+
     public EssenceStorageComponent() {
     }
 
     public EssenceStorageComponent(long essenceStored, long maxEssence, long maxReceive, long maxExtract) {
         super(essenceStored, maxEssence, maxReceive, maxExtract);
+    }
+
+    public List<Vector3i> getBoundSenderList() {
+        return boundSenderList;
     }
 
     @Override

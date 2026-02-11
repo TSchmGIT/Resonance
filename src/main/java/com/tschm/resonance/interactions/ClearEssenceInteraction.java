@@ -11,7 +11,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.client.SimpleBlockInteraction;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.tschm.resonance.components.EssenceStorageComponent;
+import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
