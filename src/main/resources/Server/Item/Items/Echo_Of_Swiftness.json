@@ -1,0 +1,43 @@
+{
+  "Animation": "Items/Echo_Of_Swiftness/Echo_Of_Swiftness.blockyanim",
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Echo_Of_Swiftness.png",
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "ItemLevel": 10,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "Model": "Items/Echo_Of_Swiftness/Echo_Of_Swiftness.blockymodel",
+  "PlayerAnimationsId": "Item",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Essence_Of_Echo"
+      },
+      {
+        "ItemId": "Plant_Fruit_Berries_Red"
+      },
+      {
+        "ItemId": "WinterHoliday_Cane"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Ingredients"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ]
+  },
+  "Quality": "Common",
+  "Texture": "Items/Echo_Of_Swiftness/Echo_Of_Swiftness.png",
+  "TranslationProperties": {
+    "Name": "items.Echo_Of_Swiftness.name",
+    "Description": "items.Echo_Of_Swiftness.description"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {}
+    },
+    "CustomModel": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "Material": "Solid",
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Carbon_Attunement_Stone.png",
+  "PlayerAnimationsId": "Block",
+  "Recipe": {
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Generator"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ],
+    "Input": [
+      {
+        "ItemId": "Basic_Attunement_Stone",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Wood_Trunk",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Bench_Campfire",
+        "Quantity": 1
+      }
+    ]
+  },
+  "TranslationProperties": {
+    "Description": "items.Carbon_Attunement_Stone.description",
+    "Name": "items.Carbon_Attunement_Stone.name"
+  }
+}

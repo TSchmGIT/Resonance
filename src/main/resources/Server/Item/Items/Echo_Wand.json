@@ -1,4 +1,7 @@
 {
+  "Categories": [
+    "Items.Tools"
+  ],
   "DropOnDeath": true,
   "Icon": "Icons/ItemsGenerated/Echo_Wand.png",
   "Interactions": {

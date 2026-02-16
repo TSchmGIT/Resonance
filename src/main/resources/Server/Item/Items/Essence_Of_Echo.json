@@ -1,0 +1,46 @@
+{
+  "Animation": "Items/Essence_Of_Echo/Essence_Of_Echo.blockyanim",
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Essence_Of_Echo.png",
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "ItemLevel": 10,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "Model": "Items/Essence_Of_Echo/Essence_Of_Echo.blockymodel",
+  "PlayerAnimationsId": "Item",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Echo_Shard",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Ingredients"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ]
+  },
+  "Quality": "Common",
+  "Texture": "Items/Essence_Of_Echo/Essence_Of_Echo.png",
+  "TranslationProperties": {
+    "Name": "items.Essence_Of_Echo.name",
+    "Description": "items.Essence_Of_Echo.description"
+  }
+}

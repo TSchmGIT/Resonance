@@ -1,0 +1,31 @@
+{
+  "Parent": "Tool_Pickaxe_Iron",
+  "TranslationProperties": {
+    "Name": "server.items.Resonant_Pickaxe.name"
+  },
+  "Icon": "Icons/ItemsGenerated/Resonant_Pickaxe.png",
+  "Model": "Items/Resonant_Pickaxe/Resonant_Pickaxe.blockymodel",
+  "Texture": "Items/Resonant_Pickaxe/Resonant_Pickaxe.png",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Armor_Iron_Legs"
+      },
+      {
+        "ItemId": "Essence_Of_Echo"
+      },
+      {
+        "ItemId": "Echo_Of_Power"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Id": "Ritual_Stone",
+        "Type": "Crafting",
+        "Categories": [
+          "Echo_Items"
+        ]
+      }
+    ]
+  }
+}

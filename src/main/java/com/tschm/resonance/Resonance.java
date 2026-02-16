@@ -2,6 +2,7 @@ package com.tschm.resonance;
 
 import com.hypixel.hytale.event.EventPriority;
 import com.hypixel.hytale.logger.HytaleLogger;
+import com.hypixel.hytale.server.core.modules.interaction.BlockHarvestUtils;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
@@ -10,6 +11,7 @@ import com.tschm.resonance.components.*;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
+import com.tschm.resonance.components.essence.generators.VerdantAttunementStoneComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
 import com.tschm.resonance.systems.EchoWandSystems;
@@ -47,6 +49,7 @@ public class Resonance extends JavaPlugin {
         EssenceStorageVisualizerComponent.setComponentType(regChunk.registerComponent(EssenceStorageVisualizerComponent.class, "Resonance_EssenceStorageVisualizer", EssenceStorageVisualizerComponent.CODEC));
 
         SolarAttunementStoneComponent.setComponentType(regChunk.registerComponent(SolarAttunementStoneComponent.class, "Resonance_SolarAttunementStoneComponent", SolarAttunementStoneComponent.CODEC));
+        VerdantAttunementStoneComponent.setComponentType(regChunk.registerComponent(VerdantAttunementStoneComponent.class, "Resonance_VerdantAttunementStoneComponent", VerdantAttunementStoneComponent.CODEC));
 
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());

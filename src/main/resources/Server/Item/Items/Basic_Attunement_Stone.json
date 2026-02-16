@@ -1,0 +1,45 @@
+{
+  "Categories": [
+    "Items.Ingredients"
+  ],
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Basic_Attunement_Stone.png",
+  "ItemEntity": {
+    "ParticleSystemId": null
+  },
+  "ItemLevel": 10,
+  "ItemSoundSetId": "ISS_Blocks_Stone",
+  "Model": "Items/Basic_Attunement_Stone/Basic_Attunement_Stone.blockymodel",
+  "PlayerAnimationsId": "Item",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Essence_Of_Echo",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Rock",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Ingredient_Life_Essence",
+        "Quantity": 1
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Generator"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ]
+  },
+  "Quality": "Common",
+  "Texture": "Items/Basic_Attunement_Stone/Basic_Attunement_Stone.png",
+  "TranslationProperties": {
+    "Name": "items.Basic_Attunement_Stone.name",
+    "Description": "items.Basic_Attunement_Stone.description"
+  }
+}

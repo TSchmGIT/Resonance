@@ -1,0 +1,54 @@
+{
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {}
+    },
+    "CustomModel": "Blocks/Verdant_Attunement_Stone/Verdant_Attunement_Stone.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Verdant_Attunement_Stone/Verdant_Attunement_Stone.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "Material": "Solid",
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Verdant_Attunement_Stone.png",
+  "PlayerAnimationsId": "Block",
+  "Quality": "Uncommon",
+  "Recipe": {
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Generator"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ],
+    "Input": [
+      {
+        "ItemId": "Basic_Attunement_Stone",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Plant_Seeds_Lettuce",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Furniture_Tavern_Planter",
+        "Quantity": 1
+      }
+    ]
+  },
+  "TranslationProperties": {
+    "Description": "items.Verdant_Attunement_Stone.description",
+    "Name": "items.Verdant_Attunement_Stone.name"
+  }
+}

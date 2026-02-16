@@ -57,11 +57,7 @@
   "Tags": {
     "Type": [
       "Ore"
-    ],
-    "Family": [
-      "Gold"
     ]
   },
-  "MaxStack": 25,
   "ItemSoundSetId": "ISS_Blocks_Stone"
 }

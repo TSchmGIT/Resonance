@@ -210,9 +210,9 @@ public class RitualStoneComponent implements Component<ChunkStore> {
     public CraftingRecipe findMatchingCraftingRecipe() {
         // Find matching recipe for current inputs
         List<CraftingRecipe> benchRecipes = CraftingPlugin.getBenchRecipes(BenchType.Crafting, "Ritual_Stone");
-        Set<Slot> availableSlots = new HashSet<>(Arrays.asList(Slot.values()));
 
         for (CraftingRecipe recipe : benchRecipes) {
+            Set<Slot> availableSlots = new HashSet<>(Arrays.asList(Slot.values()));
             boolean recipeRequirementsMet = true;
 
             // Iterate inputs to check availability
@@ -251,7 +251,6 @@ public class RitualStoneComponent implements Component<ChunkStore> {
 
                 // No available slot has the required input
                 if (matchingSlot == null) {
-//                    DebugHelper.Print("No slot matched for material: " + input.toString());
                     recipeRequirementsMet = false;
                     break;
                 }
@@ -259,7 +258,6 @@ public class RitualStoneComponent implements Component<ChunkStore> {
                 // A slot cannot be used twice
                 // This accounts for recipes with multiples items of the same id
                 availableSlots.remove(matchingSlot);
-//                DebugHelper.Print("Slot matched: " + matchingSlot.toString());
             }
 
             // If still true, we found a recipe

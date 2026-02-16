@@ -1,16 +1,20 @@
 {
+  "Categories": [
+    "Furniture.Benches"
+  ],
   "TranslationProperties": {
     "Name": "items.Ritual_Stone.name",
     "Description": "items.Ritual_Stone.description"
   },
   "PlayerAnimationsId": "Block",
   "Icon": "Icons/ItemsGenerated/Ritual_Stone.png",
+  "MaxStacks": 1,
   "Recipe": {
     "TimeSeconds": 3,
     "Input": [
       {
         "ItemId": "Echo_Shard",
-        "Quantity": 8
+        "Quantity": 4
       },
       {
         "ResourceTypeId": "Rock_Stone",
@@ -73,6 +77,11 @@
       "Type": "Crafting",
       "Categories": [
         {
+          "Id": "Echo_Ingredients",
+          "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
+          "Name": "Echo Ingredients"
+        },
+        {
           "Id": "Echo_Items",
           "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
           "Name": "Echo Items"
@@ -81,6 +90,11 @@
           "Id": "Echo_Storage",
           "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
           "Name": "Echo Storage"
+        },
+        {
+          "Id": "Echo_Generator",
+          "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
+          "Name": "Echo Generator"
         }
       ]
     }
