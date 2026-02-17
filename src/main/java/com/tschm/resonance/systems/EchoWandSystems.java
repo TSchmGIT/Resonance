@@ -16,6 +16,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.TargetUtil;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.ui.EchoWandUI;
+import com.tschm.resonance.ui.EmptyHUD;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
 import com.tschm.resonance.util.Reflect;
@@ -46,7 +47,7 @@ public class EchoWandSystems {
             final boolean shouldCheckHud = hasWand && hasTarget;
             final Vector3i targetPosFinal = targetPos;
 
-            commandBuffer.run(es -> {
+            commandBuffer.getExternalData().getWorld().execute(() -> {
                 boolean showHud = shouldCheckHud;
                 EssenceStorageComponent compStorage = null;
                 if (showHud) {
@@ -59,8 +60,9 @@ public class EchoWandSystems {
                     ui.updateHUDContent(compStorage);
                     player.getHudManager().setCustomHud(playerRef, ui);
                 } else {
-                    Reflect.HudManager_.CUSTOM_HUD.accept(player.getHudManager(), null);
-                    playerRef.getPacketHandler().writeNoCache(new CustomHud(true, new CustomUICommand[0]));
+                    player.getHudManager().setCustomHud(playerRef, new EmptyHUD(playerRef));
+//                    Reflect.HudManager_.CUSTOM_HUD.accept(player.getHudManager(), null);
+//                    playerRef.getPacketHandler().writeNoCache(new CustomHud(true, new CustomUICommand[0]));
                 }
             });
         }
