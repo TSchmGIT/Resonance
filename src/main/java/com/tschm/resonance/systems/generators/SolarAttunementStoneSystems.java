@@ -6,6 +6,7 @@ import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
 import com.tschm.resonance.systems.EssenceGeneratorSystems;
@@ -32,12 +33,8 @@ public class SolarAttunementStoneSystems {
             compGenerator.remainingTicksUntilGeneration = compGenerator.ticksPerCycle;
 
             World world = commandBuffer.getExternalData().getWorld();
-            EssenceStorageComponent compStorage = compGenerator.findTargetStorage(world, archetypeChunk, idx);
-            if (compStorage == null)
-                return;
-
             long productionPerTick = compGenerator.productionPerCycle;
-            compStorage.receiveEssence(productionPerTick, false);
+            supplyEssenceToBoundStorage(world, archetypeChunk, idx, compGenerator, productionPerTick);
         }
 
         @NullableDecl

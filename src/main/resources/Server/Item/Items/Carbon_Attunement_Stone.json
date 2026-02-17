@@ -1,7 +1,15 @@
 {
   "BlockType": {
     "BlockEntity": {
-      "Components": {}
+      "Components": {
+        "Resonance_CarbonAttunementStoneComponent": {
+          "EssencePerFuelQuality": 100,
+          "BurnTicksPerFuelQuality": 30
+        },
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 1000
+        }
+      }
     },
     "CustomModel": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone.blockymodel",
     "CustomModelTexture": [

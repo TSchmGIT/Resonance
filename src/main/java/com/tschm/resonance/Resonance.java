@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.universe.world.events.ChunkPreLoadProcessE
 import com.tschm.resonance.components.*;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
+import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.VerdantAttunementStoneComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
@@ -17,6 +18,7 @@ import com.tschm.resonance.interactions.*;
 import com.tschm.resonance.systems.EchoWandSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
 import com.tschm.resonance.systems.RitualStoneSystems;
+import com.tschm.resonance.systems.generators.CarbonAttunementStoneSystems;
 import com.tschm.resonance.systems.generators.SolarAttunementStoneSystems;
 
 import javax.annotation.Nonnull;
@@ -50,6 +52,7 @@ public class Resonance extends JavaPlugin {
 
         SolarAttunementStoneComponent.setComponentType(regChunk.registerComponent(SolarAttunementStoneComponent.class, "Resonance_SolarAttunementStoneComponent", SolarAttunementStoneComponent.CODEC));
         VerdantAttunementStoneComponent.setComponentType(regChunk.registerComponent(VerdantAttunementStoneComponent.class, "Resonance_VerdantAttunementStoneComponent", VerdantAttunementStoneComponent.CODEC));
+        CarbonAttunementStoneComponent.setComponentType(regChunk.registerComponent(CarbonAttunementStoneComponent.class, "Resonance_CarbonAttunementStoneComponent", CarbonAttunementStoneComponent.CODEC));
 
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
@@ -58,5 +61,6 @@ public class Resonance extends JavaPlugin {
 
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageVisualizerSystem());
         regChunk.registerSystem(new SolarAttunementStoneSystems.GeneratorTicks());
+        regChunk.registerSystem(new CarbonAttunementStoneSystems.GeneratorTicks());
     }
 }
