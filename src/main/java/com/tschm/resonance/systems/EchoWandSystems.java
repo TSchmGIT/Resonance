@@ -1,11 +1,10 @@
 package com.tschm.resonance.systems;
 
+import com.buuz135.mhud.MultipleHUD;
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Vector3i;
-import com.hypixel.hytale.protocol.packets.interface_.CustomHud;
-import com.hypixel.hytale.protocol.packets.interface_.CustomUICommand;
 import com.hypixel.hytale.server.core.entity.EntityUtils;
 import com.hypixel.hytale.server.core.entity.LivingEntity;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -14,12 +13,12 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.TargetUtil;
+import com.tschm.resonance.Resonance;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.ui.EchoWandUI;
 import com.tschm.resonance.ui.EmptyHUD;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
-import com.tschm.resonance.util.Reflect;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
@@ -58,11 +57,16 @@ public class EchoWandSystems {
                 if (showHud) {
                     EchoWandUI ui = EchoWandUI.get(playerRef, EchoWandUI::new);
                     ui.updateHUDContent(compStorage);
-                    player.getHudManager().setCustomHud(playerRef, ui);
+
+                    if (Resonance.isMultipleHUDLoaded())
+                        MultipleHUD.getInstance().setCustomHud(player, playerRef, "tschm:Resonance_EchoWand", ui);
+                    else
+                        player.getHudManager().setCustomHud(playerRef, ui);
                 } else {
-                    player.getHudManager().setCustomHud(playerRef, new EmptyHUD(playerRef));
-//                    Reflect.HudManager_.CUSTOM_HUD.accept(player.getHudManager(), null);
-//                    playerRef.getPacketHandler().writeNoCache(new CustomHud(true, new CustomUICommand[0]));
+                    if (Resonance.isMultipleHUDLoaded())
+                        MultipleHUD.getInstance().hideCustomHud(player, "tschm:Resonance_EchoWand");
+                    else
+                        player.getHudManager().setCustomHud(playerRef, new EmptyHUD(playerRef));
                 }
             });
         }

@@ -82,7 +82,6 @@ public class CarbonAttunementStoneSystems {
             if (compCAS.remainingBurnEssence > 0) {
                 long essenceProducedThisTick = Math.min(compCAS.currentEssencePerTick, compCAS.remainingBurnEssence);
                 compCAS.remainingBurnEssence -= essenceProducedThisTick;
-                DebugHelper.Print("Produced " + essenceProducedThisTick + "RE. Remaining: " + compCAS.remainingBurnEssence);
                 supplyEssenceToBoundStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
             }
         }

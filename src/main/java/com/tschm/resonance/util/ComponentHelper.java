@@ -44,6 +44,10 @@ public class ComponentHelper {
 
     // Work around for inheritance and component types
     @Nullable
+    public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull WorldProvider worldProvider, Vector3i pos){
+        return findGeneratorComponentAt(worldProvider.getWorld(), pos);
+    }
+    @Nullable
     public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull World world, Vector3i pos){
         int x = pos.x;
         int y = pos.y;
