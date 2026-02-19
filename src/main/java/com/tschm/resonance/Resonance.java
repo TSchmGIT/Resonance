@@ -14,12 +14,14 @@ import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.VerdantAttunementStoneComponent;
+import com.tschm.resonance.components.functional.ResonantAttractorComponent;
 import com.tschm.resonance.components.functional.ResonantDisrupterComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
 import com.tschm.resonance.systems.EchoWandSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
 import com.tschm.resonance.systems.RitualStoneSystems;
+import com.tschm.resonance.systems.functional.ResonantAttractorSystems;
 import com.tschm.resonance.systems.functional.ResonantDisrupterSystems;
 import com.tschm.resonance.systems.generators.CarbonAttunementStoneSystems;
 import com.tschm.resonance.systems.generators.SolarAttunementStoneSystems;
@@ -66,6 +68,7 @@ public class Resonance extends JavaPlugin {
         CarbonAttunementStoneComponent.setComponentType(regChunk.registerComponent(CarbonAttunementStoneComponent.class, "Resonance_CarbonAttunementStoneComponent", CarbonAttunementStoneComponent.CODEC));
 
         ResonantDisrupterComponent.setComponentType(regChunk.registerComponent(ResonantDisrupterComponent.class, "Resonance_ResonantDisrupter", ResonantDisrupterComponent.CODEC));
+        ResonantAttractorComponent.setComponentType(regChunk.registerComponent(ResonantAttractorComponent.class, "Resonance_ResonantAttractor", ResonantAttractorComponent.CODEC));
 
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
@@ -77,5 +80,6 @@ public class Resonance extends JavaPlugin {
         regChunk.registerSystem(new CarbonAttunementStoneSystems.GeneratorTicks());
 
         regChunk.registerSystem(new ResonantDisrupterSystems.TickingSystem());
+        regChunk.registerSystem(new ResonantAttractorSystems.TickingSystem());
     }
 }

@@ -1,0 +1,62 @@
+{
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 1000
+        },
+        "Resonance_ResonantAttractor": {
+          "AttractionRangeUnattuned": 3,
+          "AttractionRangeAttuned": 5,
+          "AttractionSpeed": 0.05
+        }
+      }
+    },
+    "CustomModel": "Blocks/Resonant_Attractor/Resonant_Attractor.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Resonant_Attractor/Resonant_Attractor.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "Material": "Solid",
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Resonant_Attractor.png",
+  "PlayerAnimationsId": "Block",
+  "Recipe": {
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Generator"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ],
+    "Input": [
+      {
+        "ItemId": "Basic_Attunement_Stone",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Wood_Trunk",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Bench_Campfire",
+        "Quantity": 1
+      }
+    ]
+  },
+  "TranslationProperties": {
+    "Description": "items.Resonant_Attractor.description",
+    "Name": "items.Resonant_Attractor.name"
+  }
+}

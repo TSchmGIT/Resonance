@@ -40,11 +40,7 @@ public class CarbonAttunementStoneSystems {
                 world.execute(() -> {
                     Store<EntityStore> entityStore = world.getEntityStore().getStore();
 
-                    ObjectList<Ref<EntityStore>> results = SpatialResource.getThreadLocalReferenceList();
-                    SpatialResource<Ref<EntityStore>, EntityStore> itemSpatialResource = entityStore.getResource(EntityModule.get().getItemSpatialResourceType());
-                    itemSpatialResource.getSpatialStructure().collect(blockPos.toVector3d(), 2.0f, results);
-
-                    for (Ref<EntityStore> entity : results) {
+                    for (Ref<EntityStore> entity : SystemsHelper.getItemsInRange(entityStore, blockPos, 2.0)) {
                         ItemComponent compItem = entityStore.getComponent(entity, ItemComponent.getComponentType());
                         if (compItem == null || !compItem.canPickUp())
                             continue;

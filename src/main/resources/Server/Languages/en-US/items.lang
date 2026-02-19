@@ -30,3 +30,5 @@ Resonant_Pickaxe.name = Resonant Pickaxe
 Resonant_Pickaxe.description = A powerful pickaxe that can break 3x3 blocks
 Resonant_Disruptor.name = Resonant Disruptor
 Resonant_Disruptor.description = Damages nearby blocks (i.e tree trunks)
+Resonant_Attractor.name = Resonant Attractor
+Resonant_Attractor.description = Sucks in nearby item like a magnet
