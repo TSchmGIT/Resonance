@@ -1,7 +1,8 @@
 {
   "Parent": "Tool_Pickaxe_Iron",
   "TranslationProperties": {
-    "Name": "server.items.Resonant_Pickaxe.name"
+    "Name": "items.Resonant_Pickaxe.name",
+    "Description": "items.Resonant_Pickaxe.description"
   },
   "Icon": "Icons/ItemsGenerated/Resonant_Pickaxe.png",
   "Model": "Items/Resonant_Pickaxe/Resonant_Pickaxe.blockymodel",

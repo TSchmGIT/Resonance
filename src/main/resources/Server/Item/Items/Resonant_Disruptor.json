@@ -1,0 +1,62 @@
+{
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 1000
+        },
+        "Resonance_ResonantDisrupter": {
+          "TicksPerOperation": 30,
+          "DamagePerOperation": 0.2,
+          "DamageRange": 3
+        }
+      }
+    },
+    "CustomModel": "Blocks/Resonant_Disruptor/Resonant_Disruptor.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Resonant_Disruptor/Resonant_Disruptor.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "Material": "Solid",
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Resonant_Disruptor.png",
+  "PlayerAnimationsId": "Block",
+  "Recipe": {
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Echo_Generator"
+        ],
+        "Id": "Ritual_Stone",
+        "Type": "Crafting"
+      }
+    ],
+    "Input": [
+      {
+        "ItemId": "Basic_Attunement_Stone",
+        "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Wood_Trunk",
+        "Quantity": 1
+      },
+      {
+        "ItemId": "Bench_Campfire",
+        "Quantity": 1
+      }
+    ]
+  },
+  "TranslationProperties": {
+    "Description": "items.Resonant_Disruptor.description",
+    "Name": "items.Resonant_Disruptor.name"
+  }
+}

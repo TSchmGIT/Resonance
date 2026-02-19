@@ -7,6 +7,12 @@
             <id>hytale-release</id>
             <url>https://maven.hytale.com/release</url>
         </repository>
+
+        <!-- Hytale Modders repo (for MultipleHUD etc.) -->
+        <repository>
+            <id>hytale-mods-releases</id>
+            <url>https://maven.hytale-mods.dev/releases</url>
+        </repository>
     </repositories>
 
     <modelVersion>4.0.0</modelVersion>
@@ -26,7 +32,13 @@
             <groupId>com.hypixel.hytale</groupId>
             <artifactId>Server</artifactId>
             <!-- Replace with latest version, Hytale provides jars for the last five releases -->
-            <version>2026.02.17-255364b8e</version>
+            <version>2026.02.18-f3b8fff95</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.buuz135</groupId>
+            <artifactId>MultipleHUD</artifactId>
+            <version>1.0.6</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

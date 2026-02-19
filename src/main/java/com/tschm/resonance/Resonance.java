@@ -1,11 +1,12 @@
 package com.tschm.resonance;
 
+import com.hypixel.hytale.common.plugin.PluginIdentifier;
 import com.hypixel.hytale.event.EventPriority;
 import com.hypixel.hytale.logger.HytaleLogger;
-import com.hypixel.hytale.server.core.modules.interaction.BlockHarvestUtils;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.Interaction;
 import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
+import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.world.events.ChunkPreLoadProcessEvent;
 import com.tschm.resonance.components.*;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
@@ -13,11 +14,13 @@ import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.VerdantAttunementStoneComponent;
+import com.tschm.resonance.components.functional.ResonantDisrupterComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
 import com.tschm.resonance.systems.EchoWandSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
 import com.tschm.resonance.systems.RitualStoneSystems;
+import com.tschm.resonance.systems.functional.ResonantDisrupterSystems;
 import com.tschm.resonance.systems.generators.CarbonAttunementStoneSystems;
 import com.tschm.resonance.systems.generators.SolarAttunementStoneSystems;
 
@@ -26,6 +29,11 @@ import javax.annotation.Nonnull;
 public class Resonance extends JavaPlugin {
     public static final HytaleLogger LOGGER = HytaleLogger.forEnclosingClass();
 
+    private static boolean multipleHUDLoaded = false;
+    public static boolean isMultipleHUDLoaded() {
+        return multipleHUDLoaded;
+    }
+
     public Resonance(@Nonnull JavaPluginInit init) {
         super(init);
     }
@@ -33,6 +41,9 @@ public class Resonance extends JavaPlugin {
     @Override
     protected void setup() {
         super.setup();
+
+        // Check available dependencies
+        multipleHUDLoaded = PluginManager.get().getPlugin(PluginIdentifier.fromString("Buuz135:MultipleHUD")) != null;
 
         // Interactions
         var interactionRegistry = this.getCodecRegistry(Interaction.CODEC);
@@ -54,6 +65,8 @@ public class Resonance extends JavaPlugin {
         VerdantAttunementStoneComponent.setComponentType(regChunk.registerComponent(VerdantAttunementStoneComponent.class, "Resonance_VerdantAttunementStoneComponent", VerdantAttunementStoneComponent.CODEC));
         CarbonAttunementStoneComponent.setComponentType(regChunk.registerComponent(CarbonAttunementStoneComponent.class, "Resonance_CarbonAttunementStoneComponent", CarbonAttunementStoneComponent.CODEC));
 
+        ResonantDisrupterComponent.setComponentType(regChunk.registerComponent(ResonantDisrupterComponent.class, "Resonance_ResonantDisrupter", ResonantDisrupterComponent.CODEC));
+
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
         regEntity.registerSystem(new EssenceStorageSystems.VisualizerPlacedChunk());
@@ -62,5 +75,7 @@ public class Resonance extends JavaPlugin {
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageVisualizerSystem());
         regChunk.registerSystem(new SolarAttunementStoneSystems.GeneratorTicks());
         regChunk.registerSystem(new CarbonAttunementStoneSystems.GeneratorTicks());
+
+        regChunk.registerSystem(new ResonantDisrupterSystems.TickingSystem());
     }
 }

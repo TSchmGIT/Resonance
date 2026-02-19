@@ -67,7 +67,26 @@ public enum SetBlockFlag {
      * If set, skip heightmap updates (chunk height tracking) even if y is above old height.
      * Code: if ((settings & 512) == 0 && oldHeight <= y) { ... updateHeight/setHeight ... }
      */
-    SKIP_HEIGHT_UPDATE(512);
+    SKIP_HEIGHT_UPDATE(512),
+
+    /**
+     * If set, do NOT play gathering-related sounds such as:
+     * - unbreakable block hit sounds
+     * - block hit / break sounds
+     * - incorrect tool feedback sounds
+     * - tool/weapon hit sound layers
+     *
+     * Code: many places use: if ((setBlockSettings & 1024) == 0) { SoundUtil.playSoundEvent3d(...) }
+     */
+    SKIP_SOUNDS(1024),
+
+    /**
+     * If set, do NOT spawn item drops when breaking/changing a block state in this routine.
+     * Code:
+     * - if ((setBlockSettings & 2048) == 0) { generateItemDrops(...) }
+     * - performBlockBreak(..., setBlockSettings | 2048, ...) used to suppress double-drops
+     */
+    SKIP_ITEM_DROPS(2048);
 
     public final int mask;
 
