@@ -5,6 +5,7 @@ import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Vector3i;
+import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
 import com.hypixel.hytale.server.core.entity.EntityUtils;
 import com.hypixel.hytale.server.core.entity.LivingEntity;
 import com.hypixel.hytale.server.core.entity.entities.Player;
@@ -19,6 +20,7 @@ import com.tschm.resonance.ui.EchoWandUI;
 import com.tschm.resonance.ui.EmptyHUD;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
+import com.tschm.resonance.util.HUDProvider;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
@@ -56,7 +58,8 @@ public class EchoWandSystems {
 
                 if (showHud) {
                     EchoWandUI ui = EchoWandUI.get(playerRef, EchoWandUI::new);
-                    ui.updateHUDContent(compStorage);
+                    BlockType blockType = commandBuffer.getExternalData().getWorld().getBlockType(targetPosFinal);
+                    ui.updateHUDContent(compStorage.getEssenceStored(), compStorage.getMaxEssenceStored(), HUDProvider.getDisplayName(blockType));
 
                     if (Resonance.isMultipleHUDLoaded())
                         MultipleHUD.getInstance().setCustomHud(player, playerRef, "tschm:Resonance_EchoWand", ui);
