@@ -22,14 +22,17 @@ public final class EssenceStorageComponent extends AbstractEssenceStorage implem
         EssenceStorageComponent.type = type;
     }
 
+    public boolean canReceive = true;
+
     // List of block position that send RE to this storage
     private List<Vector3i> boundSenderList = new ArrayList<Vector3i>();
 
     public EssenceStorageComponent() {
     }
 
-    public EssenceStorageComponent(long essenceStored, long maxEssence, long maxReceive, long maxExtract) {
+    public EssenceStorageComponent(long essenceStored, long maxEssence, long maxReceive, long maxExtract, boolean canReceive) {
         super(essenceStored, maxEssence, maxReceive, maxExtract);
+        this.canReceive = canReceive;
     }
 
     public List<Vector3i> getBoundSenderList() {
@@ -41,6 +44,11 @@ public final class EssenceStorageComponent extends AbstractEssenceStorage implem
         EssenceStorageComponent copy = new EssenceStorageComponent();
         copy.copyFrom(this);
         return copy;
+    }
+
+    public void copyFrom(EssenceStorageComponent other) {
+        super.copyFrom(other);
+        this.canReceive = other.canReceive;
     }
 
     static {
@@ -57,6 +65,10 @@ public final class EssenceStorageComponent extends AbstractEssenceStorage implem
                 .append(new KeyedCodec<>("MaxExtract", BuilderCodec.LONG), (c, v) -> c.maxExtract = v, c -> c.maxExtract)
                 .addValidator(Validators.greaterThanOrEqual(0L))
                 .documentation("Maximum RE extracted per extract call").add()
+
+                .append(new KeyedCodec<>("CanReceive", BuilderCodec.BOOLEAN), (c, v) -> c.canReceive = v, c -> c.canReceive)
+                .documentation("Can this storage receive essence from another storage").add()
+
                 .build();
     }
 }

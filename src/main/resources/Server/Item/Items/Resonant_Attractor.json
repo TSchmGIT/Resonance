@@ -6,9 +6,13 @@
           "MaxEssence": 1000
         },
         "Resonance_ResonantAttractor": {
-          "AttractionRangeUnattuned": 3,
-          "AttractionRangeAttuned": 5,
+          "AttractionRangeUnattuned": 5,
+          "AttractionRangeAttuned": 7,
           "AttractionSpeed": 0.05
+        },
+        "Resonance_EchoStorageComponent": {
+          "CanSend": true,
+          "CanReceive": false
         }
       }
     },

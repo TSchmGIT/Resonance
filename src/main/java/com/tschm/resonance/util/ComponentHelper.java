@@ -13,6 +13,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.WorldProvider;
 import com.hypixel.hytale.server.core.universe.world.chunk.BlockComponentChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
+import com.hypixel.hytale.server.core.universe.world.meta.BlockState;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
@@ -44,11 +45,12 @@ public class ComponentHelper {
 
     // Work around for inheritance and component types
     @Nullable
-    public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull WorldProvider worldProvider, Vector3i pos){
+    public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull WorldProvider worldProvider, Vector3i pos) {
         return findGeneratorComponentAt(worldProvider.getWorld(), pos);
     }
+
     @Nullable
-    public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull World world, Vector3i pos){
+    public static <ECS_TYPE extends WorldProvider> EssenceGeneratorComponent findGeneratorComponentAt(@Nonnull World world, @Nonnull Vector3i pos) {
         int x = pos.x;
         int y = pos.y;
         int z = pos.z;
@@ -70,5 +72,13 @@ public class ComponentHelper {
         comp = comp != null ? comp : blockComponentChunk.getComponent(blockIndexColumn, CarbonAttunementStoneComponent.getComponentType());
 
         return comp;
+    }
+
+    @Deprecated(forRemoval = true)
+    @Nullable
+    public static <T extends BlockState> T findBlockStateAt(@Nonnull World world, @Nonnull Vector3i pos, Class<T> type) {
+        WorldChunk worldChunk = world.getChunk(ChunkUtil.indexChunkFromBlock(pos.x, pos.z));
+        BlockState blockState = worldChunk != null ? worldChunk.getState(pos.x, pos.y, pos.z) : null;
+        return type.isInstance(blockState) ? type.cast(blockState) : null;
     }
 }

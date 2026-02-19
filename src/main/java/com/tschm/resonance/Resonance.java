@@ -16,6 +16,7 @@ import com.tschm.resonance.components.essence.generators.SolarAttunementStoneCom
 import com.tschm.resonance.components.essence.generators.VerdantAttunementStoneComponent;
 import com.tschm.resonance.components.functional.ResonantAttractorComponent;
 import com.tschm.resonance.components.functional.ResonantDisrupterComponent;
+import com.tschm.resonance.components.storage.EchoStorageComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
 import com.tschm.resonance.systems.EchoWandSystems;
@@ -25,6 +26,7 @@ import com.tschm.resonance.systems.functional.ResonantAttractorSystems;
 import com.tschm.resonance.systems.functional.ResonantDisrupterSystems;
 import com.tschm.resonance.systems.generators.CarbonAttunementStoneSystems;
 import com.tschm.resonance.systems.generators.SolarAttunementStoneSystems;
+import com.tschm.resonance.systems.storage.EchoStorageSystems;
 
 import javax.annotation.Nonnull;
 
@@ -70,6 +72,8 @@ public class Resonance extends JavaPlugin {
         ResonantDisrupterComponent.setComponentType(regChunk.registerComponent(ResonantDisrupterComponent.class, "Resonance_ResonantDisrupter", ResonantDisrupterComponent.CODEC));
         ResonantAttractorComponent.setComponentType(regChunk.registerComponent(ResonantAttractorComponent.class, "Resonance_ResonantAttractor", ResonantAttractorComponent.CODEC));
 
+        EchoStorageComponent.setComponentType(regChunk.registerComponent(EchoStorageComponent.class, "Resonance_EchoStorageComponent", EchoStorageComponent.CODEC));
+
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
         regEntity.registerSystem(new EssenceStorageSystems.VisualizerPlacedChunk());
@@ -81,5 +85,7 @@ public class Resonance extends JavaPlugin {
 
         regChunk.registerSystem(new ResonantDisrupterSystems.TickingSystem());
         regChunk.registerSystem(new ResonantAttractorSystems.TickingSystem());
+
+        regChunk.registerSystem(new EchoStorageSystems.TickingSystem());
     }
 }

@@ -41,12 +41,17 @@ public class ResonantDisrupterSystems {
 
             // Check if we have to find a new damage block
             if (compRD.remainingTicksUntilOperation == 0) {
-                World world = commandBuffer.getExternalData().getWorld();
-                if (canDamageBlockAt(world, currentSearchPos)) {
-                    compRD.remainingTicksUntilOperation = compRD.ticksPerOperation;
-                } else {
-                    compRD.advanceCurrentBlockIndex();
-                }
+                commandBuffer.run(cs -> {
+                    World world = commandBuffer.getExternalData().getWorld();
+                    if (canDamageBlockAt(world, currentSearchPos)) {
+                        compRD.remainingTicksUntilOperation = compRD.ticksPerOperation;
+                    } else {
+                        compRD.advanceCurrentBlockIndex();
+                    }
+
+                });
+
+                return;
             }
 
             // Check if there is currently a damage operation in progress
