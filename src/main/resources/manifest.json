@@ -9,9 +9,7 @@
     }
   ],
   "ServerVersion": "2026.02.19-1a311a592",
-  "Dependencies": {
-    "Hytale:EntityModule": "*"
-  },
+  "Dependencies": {},
   "OptionalDependencies": {},
   "DisabledByDefault": false,
   "IncludesAssetPack": true,
