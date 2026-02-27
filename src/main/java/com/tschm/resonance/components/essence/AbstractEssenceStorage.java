@@ -1,9 +1,15 @@
 package com.tschm.resonance.components.essence;
 
+import com.hypixel.hytale.codec.KeyedCodec;
+import com.hypixel.hytale.codec.builder.BuilderCodec;
+import com.hypixel.hytale.codec.validation.Validators;
+
 // CREDITS TO killer.Essencestorage mod
 // https://github.com/zkiller/HytaleEssenceStorage
 // https://www.curseforge.com/hytale/mods/Essencestorage
 public abstract class AbstractEssenceStorage implements IEssenceStorage {
+    public static final BuilderCodec<AbstractEssenceStorage> CODEC;
+
     protected long essenceStored;
 
     protected long maxEssence;
@@ -115,7 +121,7 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
     public float getFillRatio() {
         if (this.maxEssence <= 0L)
             return 0.0F;
-        return (float)this.essenceStored / (float)this.maxEssence;
+        return (float) this.essenceStored / (float) this.maxEssence;
     }
 
     public boolean isFull() {
@@ -131,5 +137,22 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
         this.maxEssence = other.maxEssence;
         this.maxReceive = other.maxReceive;
         this.maxExtract = other.maxExtract;
+    }
+
+    static {
+        CODEC = BuilderCodec.abstractBuilder(AbstractEssenceStorage.class)
+                .append(new KeyedCodec<>("EssenceStored", BuilderCodec.LONG), (c, v) -> c.essenceStored = v, c -> c.essenceStored)
+                .addValidator(Validators.greaterThanOrEqual(0L))
+                .documentation("Currently stored RE").add()
+                .append(new KeyedCodec<>("MaxEssence", BuilderCodec.LONG), (c, v) -> c.maxEssence = v, c -> c.maxEssence)
+                .addValidator(Validators.greaterThanOrEqual(0L))
+                .documentation("Maximum amount of stored RE possible").add()
+                .append(new KeyedCodec<>("MaxReceive", BuilderCodec.LONG), (c, v) -> c.maxReceive = v, c -> c.maxReceive)
+                .addValidator(Validators.greaterThanOrEqual(0L))
+                .documentation("Maximum RE received per operation").add()
+                .append(new KeyedCodec<>("MaxExtract", BuilderCodec.LONG), (c, v) -> c.maxExtract = v, c -> c.maxExtract)
+                .addValidator(Validators.greaterThanOrEqual(0L))
+                .documentation("Maximum RE extracted per operation").add()
+                .build();
     }
 }
