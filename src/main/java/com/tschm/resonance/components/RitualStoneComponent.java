@@ -206,68 +206,6 @@ public class RitualStoneComponent implements Component<ChunkStore> {
         return null;
     }
 
-    @Nullable
-    public CraftingRecipe findMatchingCraftingRecipe() {
-        // Find matching recipe for current inputs
-        List<CraftingRecipe> benchRecipes = CraftingPlugin.getBenchRecipes(BenchType.Crafting, "Ritual_Stone");
-
-        for (CraftingRecipe recipe : benchRecipes) {
-            Set<Slot> availableSlots = new HashSet<>(Arrays.asList(Slot.values()));
-            boolean recipeRequirementsMet = true;
-
-            // Iterate inputs to check availability
-            for (MaterialQuantity input : recipe.getInput()) {
-                // Check if any available slot contains required inpt
-                Slot matchingSlot = null;
-                for (Slot availableSlot : availableSlots) {
-
-                    // If item -> check item requirements
-                    if (input.getItemId() != null) {
-                        ItemStack inputStack = input.toItemStack();
-                        ItemStack slotStack = getItem(availableSlot);
-                        if (ItemStack.isEquivalentType(inputStack, slotStack)) {
-                            matchingSlot = availableSlot;
-                            break;
-                        }
-                    }
-                    // If tag -> check tag requirements
-                    else if (input.getTagIndex() != Integer.MIN_VALUE) {
-                        /* NYI */
-                    }
-                    // Else resource -> check resource requirements
-                    else {
-                        ResourceQuantity resource = input.toResource();
-                        ItemStack slotItemStack = getItem(availableSlot);
-                        if (!ItemStack.isEmpty(slotItemStack)) {
-                            Item slotItem = slotItemStack.getItem();
-                            ItemResourceType resourceType = resource.getResourceType(slotItem);
-                            if (resourceType != null) {
-                                matchingSlot = availableSlot;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                // No available slot has the required input
-                if (matchingSlot == null) {
-                    recipeRequirementsMet = false;
-                    break;
-                }
-
-                // A slot cannot be used twice
-                // This accounts for recipes with multiples items of the same id
-                availableSlots.remove(matchingSlot);
-            }
-
-            // If still true, we found a recipe
-            if (recipeRequirementsMet) {
-                return recipe;
-            }
-        }
-        return null;
-    }
-
     static {
         CODEC = BuilderCodec.builder(RitualStoneComponent.class, RitualStoneComponent::new)
                 .append(new KeyedCodec<>("MainInput", ItemStack.CODEC),
