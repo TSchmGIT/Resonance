@@ -10,6 +10,36 @@ import com.hypixel.hytale.codec.validation.Validators;
 public abstract class AbstractEssenceStorage implements IEssenceStorage {
     public static final BuilderCodec<AbstractEssenceStorage> CODEC;
 
+    /**
+     * Transfers a specified amount of essence from one storage to another.
+     * Validates the transfer based on the capabilities and capacities of the
+     * source and target essence storages. Can optionally simulate the transfer
+     * without performing it.
+     *
+     * @param from The source essence storage from which essence will be extracted.
+     * @param to The target essence storage to which essence will be transferred.
+     * @param amount The amount of essence to transfer.
+     * @param simulate If true, the transfer will only be simulated and no actual
+     *                 changes will be made to the storages.
+     * @return {@code true} if the transfer is possible (or would be possible in
+     *         simulation mode), {@code false} otherwise.
+     */
+    public static boolean transferEssence(IEssenceStorage from, IEssenceStorage to, long amount, boolean simulate) {
+        final long possibleExtracted = from.extractEssence(amount, true);
+        final long possibleInserted = to.receiveEssence(amount, true);
+        if (possibleExtracted < amount || possibleExtracted != possibleInserted)
+            return false;
+
+        if (!simulate) {
+            final long extracted = from.extractEssence(amount, false);
+            final long inserted = to.receiveEssence(extracted, false);
+            assert extracted == amount && extracted == inserted;
+        }
+
+        return true;
+    }
+
+
     protected long essenceStored;
 
     protected long maxEssence;
@@ -44,9 +74,15 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
     public long getMaxReceive() {
         return this.maxReceive;
     }
+    public void setMaxReceive(long maxReceive) {
+        this.maxReceive = maxReceive;
+    }
 
     public long getMaxExtract() {
         return this.maxExtract;
+    }
+    public void setMaxExtract(long maxExtract) {
+        this.maxExtract = maxExtract;
     }
 
     public boolean canReceive() {

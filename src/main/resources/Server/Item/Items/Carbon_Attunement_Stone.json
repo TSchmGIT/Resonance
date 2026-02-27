@@ -7,7 +7,8 @@
           "BurnTicksPerFuelQuality": 30
         },
         "Resonance_EssenceStorage": {
-          "MaxEssence": 1000
+          "MaxEssence": 1000,
+          "CanSend": true
         }
       }
     },

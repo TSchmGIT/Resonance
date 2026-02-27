@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.core.modules.entity.item.ItemComponent;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.systems.EssenceGeneratorSystems;
 import com.tschm.resonance.util.DebugHelper;
@@ -26,8 +27,11 @@ public class CarbonAttunementStoneSystems {
     public static class GeneratorTicks extends EssenceGeneratorSystems.GeneratorTicks {
 
         @Override
-        public void tick(float v, int idx, @Nonnull ArchetypeChunk<ChunkStore> archetypeChunk, @Nonnull Store<ChunkStore> store, @Nonnull CommandBuffer<ChunkStore> commandBuffer) {
+        public void tick(float dt, int idx, @Nonnull ArchetypeChunk<ChunkStore> archetypeChunk, @Nonnull Store<ChunkStore> store, @Nonnull CommandBuffer<ChunkStore> commandBuffer) {
+            super.tick(dt, idx, archetypeChunk, store, commandBuffer);
+
             CarbonAttunementStoneComponent compCAS = archetypeChunk.getComponent(idx, CarbonAttunementStoneComponent.getComponentType());
+            final EssenceStorageComponent compStorage = archetypeChunk.getComponent(idx, EssenceStorageComponent.getComponentType());
             assert compCAS != null;
 
             final World world = commandBuffer.getExternalData().getWorld();
@@ -61,6 +65,8 @@ public class CarbonAttunementStoneSystems {
 
                         compCAS.remainingBurnEssence = totalEssence;
                         compCAS.currentEssencePerTick = totalEssence / totalTicks;
+                        if (compStorage != null)
+                            compStorage.setMaxExtract(compCAS.currentEssencePerTick);
 
                         // Reduce the ItemStack by 1
                         if (itemStack.getQuantity() == 1)

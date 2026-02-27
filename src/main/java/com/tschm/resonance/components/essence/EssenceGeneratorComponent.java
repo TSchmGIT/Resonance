@@ -14,12 +14,13 @@ import javax.annotation.Nullable;
 public abstract class EssenceGeneratorComponent implements Component<ChunkStore> {
     public static final BuilderCodec<EssenceGeneratorComponent> CODEC;
 
+    @Nullable
     public Vector3i boundStoragePos = null;
 
     public EssenceGeneratorComponent() {
     }
 
-    public EssenceGeneratorComponent(Vector3i boundStoragePos) {
+    public EssenceGeneratorComponent(@Nullable Vector3i boundStoragePos) {
         this.boundStoragePos = boundStoragePos;
     }
 

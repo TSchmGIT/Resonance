@@ -24,6 +24,8 @@ public class SolarAttunementStoneSystems {
                 @Nonnull ArchetypeChunk<ChunkStore> archetypeChunk,
                 @Nonnull Store<ChunkStore> store,
                 @Nonnull CommandBuffer<ChunkStore> commandBuffer) {
+            super.tick(dt, idx, archetypeChunk, store, commandBuffer);
+
             SolarAttunementStoneComponent compGenerator = archetypeChunk.getComponent(idx, SolarAttunementStoneComponent.getComponentType());
             assert compGenerator != null;
 
