@@ -19,11 +19,43 @@ import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
 import com.tschm.resonance.util.SetBlockFlag;
-import com.tschm.resonance.util.SystemsHelper;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class EssenceStorageSystems {
+    // Event system to initialize the properties of the visualizer component
+    public static class VisualizerPlacedChunk extends EntityEventSystem<EntityStore, PlaceBlockEvent> {
+        public VisualizerPlacedChunk() {
+            super(PlaceBlockEvent.class);
+        }
+
+        @Override
+        public void handle(int i, @NonNullDecl ArchetypeChunk<EntityStore> archetypeChunk, @NonNullDecl Store<EntityStore> store, @NonNullDecl CommandBuffer<EntityStore> commandBuffer, @NonNullDecl PlaceBlockEvent placeBlockEvent) {
+            ItemStack itemStack = placeBlockEvent.getItemInHand();
+            String itemId = itemStack != null ? itemStack.getItemId() : "";
+            if (!itemId.equals("Resonant_Vessel")){
+                return;
+            }
+
+            World world = commandBuffer.getExternalData().getWorld();
+            Vector3i targetPos = placeBlockEvent.getTargetBlock();
+            commandBuffer.run(entityStore -> {
+                var compVisualizer = ComponentHelper.findComponentAt(world, targetPos, EssenceStorageVisualizerComponent.getComponentType());
+                if (compVisualizer == null){
+                    DebugHelper.Print("Position NOT set!");
+                    return;
+                }
+
+                compVisualizer.setPosition(targetPos);
+            });
+        }
+
+        @Override
+        public Query<EntityStore> getQuery() {
+            return PlayerRef.getComponentType();
+        }
+    }
+
     // Updates the block state of the visualizer
     public static class EssenceStorageVisualizerSystem extends EntityTickingSystem<ChunkStore> {
 
@@ -34,9 +66,8 @@ public class EssenceStorageSystems {
         public void tick(float v, int idx, @NonNullDecl ArchetypeChunk<ChunkStore> archetypeChunk, @NonNullDecl Store<ChunkStore> store, @NonNullDecl CommandBuffer<ChunkStore> commandBuffer) {
             EssenceStorageVisualizerComponent compVisualizer = archetypeChunk.getComponent(idx, EssenceStorageVisualizerComponent.getComponentType());
             EssenceStorageComponent compStorage = archetypeChunk.getComponent(idx, EssenceStorageComponent.getComponentType());
-            final Vector3i targetBlock = SystemsHelper.getPosForBlock(archetypeChunk, idx, commandBuffer);
-            if (compStorage == null || compVisualizer == null || targetBlock == null) {
-                DebugHelper.Print("compStorage or compVisualizer or targetPos null");
+            if (compStorage == null || compVisualizer == null) {
+                DebugHelper.Print("compStorage or compVisualizer null");
                 return;
             }
 
@@ -47,14 +78,21 @@ public class EssenceStorageSystems {
 
             compVisualizer.setCurrentLevel(newLevel);
 
+            Vector3i targetBlock = compVisualizer.getPosition();
+            if (targetBlock == null){
+                DebugHelper.Print("targetBlock null");
+                return;
+            }
+
             Ref<ChunkStore> ref = archetypeChunk.getReferenceTo(idx);
             BlockModule.BlockStateInfo info = (BlockModule.BlockStateInfo) commandBuffer.getComponent(ref, BlockModule.BlockStateInfo.getComponentType());
-            if (info == null) {
+            if (info == null){
                 DebugHelper.Print("info null");
                 return;
             }
             WorldChunk worldChunk = (WorldChunk) commandBuffer.getComponent(info.getChunkRef(), WorldChunk.getComponentType());
-            if (worldChunk == null) {
+            if (worldChunk == null)
+            {
                 DebugHelper.Print("worldChunk null");
                 return;
             }
@@ -95,6 +133,11 @@ public class EssenceStorageSystems {
                         SetBlockFlag.SKIP_BREAK_OLD_FILLER_BLOCKS);
 
                 worldChunk.setBlock(targetBlock.x, targetBlock.y, targetBlock.z, newBlockId, newBlockType, rotation, 0, settings);
+
+                World world = commandBuffer.getExternalData().getWorld();
+                EssenceStorageVisualizerComponent compStorageNew = ComponentHelper.findComponentAt(world, targetBlock, EssenceStorageVisualizerComponent.getComponentType());
+                if (compStorageNew != null)
+                    compStorageNew.setPosition(targetBlock);
             });
         }
 

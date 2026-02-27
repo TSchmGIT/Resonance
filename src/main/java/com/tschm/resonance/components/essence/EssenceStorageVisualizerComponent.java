@@ -20,14 +20,26 @@ public class EssenceStorageVisualizerComponent implements Component<ChunkStore> 
     public static void setComponentType(ComponentType<ChunkStore, EssenceStorageVisualizerComponent> type) {
         EssenceStorageVisualizerComponent.type = type;
     }
+
+    private Vector3i position;
     private int currentLevel = -1;
 
     public EssenceStorageVisualizerComponent() {
     }
 
-    public EssenceStorageVisualizerComponent(int currentLevel) {
+    public EssenceStorageVisualizerComponent(Vector3i position, int currentLevel) {
+        this.position = position;
         this.currentLevel = currentLevel;
     }
+
+    public Vector3i getPosition() {
+        return position;
+    }
+
+    public void setPosition(@Nonnull Vector3i position) {
+        this.position = position;
+    }
+
     public int getCurrentLevel() {
         return currentLevel;
     }
@@ -38,12 +50,12 @@ public class EssenceStorageVisualizerComponent implements Component<ChunkStore> 
 
     @Override
     public Component<ChunkStore> clone() {
-        return new EssenceStorageVisualizerComponent(this.currentLevel);
+        return new EssenceStorageVisualizerComponent(this.position, this.currentLevel);
     }
 
     static {
         CODEC = BuilderCodec.builder(EssenceStorageVisualizerComponent.class, EssenceStorageVisualizerComponent::new)
-                .append(new KeyedCodec<>("CurrentLevel", BuilderCodec.INTEGER), (c, v) -> c.currentLevel = v, c -> c.currentLevel).add()
+                .append(new KeyedCodec<>("Position", Vector3i.CODEC), (c, v) -> c.position = v, c -> c.position).add()
                 .build();
     }
 }

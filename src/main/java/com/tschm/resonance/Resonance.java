@@ -76,6 +76,7 @@ public class Resonance extends JavaPlugin {
 
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
+        regEntity.registerSystem(new EssenceStorageSystems.VisualizerPlacedChunk());
         regEntity.registerSystem(new EchoWandSystems.HUDManager());
 
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageVisualizerSystem());
