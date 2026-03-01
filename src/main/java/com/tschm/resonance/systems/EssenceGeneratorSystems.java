@@ -10,8 +10,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.essence.AbstractEssenceStorage;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
-import com.tschm.resonance.util.ComponentHelper;
-import com.tschm.resonance.util.SystemsHelper;
+import com.tschm.resonance.util.*;
 
 import javax.annotation.Nonnull;
 
@@ -46,7 +45,25 @@ public class EssenceGeneratorSystems {
             if (compStorage == null)
                 return 0L;
 
-            return compStorage.receiveEssence(amount, false);
+            long inserted = compStorage.addEssence(amount, false);
+
+            // Fill storage of comp if target storage couldn't fill
+            if (inserted < amount){
+                long remaining = amount - inserted;
+                EssenceStorageComponent compStorageLocal = archetypeChunk.getComponent(idx, EssenceStorageComponent.getComponentType());
+                if (compStorageLocal != null)
+                    inserted += compStorageLocal.addEssence(remaining, false);
+            }
+
+            return inserted;
+        }
+
+        protected void updateGeneratorBlockState(boolean isActive, World world, Vector3i pos, EssenceGeneratorComponent compGenerator) {
+            compGenerator.active = isActive;
+            String errorString = BlockHelper.activateBlockState(isActive ? "On" : "Off", world, pos);
+            if (errorString != null) {
+                DebugHelper.Print("Error while updating generator block state: " + errorString);
+            }
         }
 
     }

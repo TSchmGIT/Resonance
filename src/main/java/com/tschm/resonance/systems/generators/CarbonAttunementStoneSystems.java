@@ -2,11 +2,9 @@ package com.tschm.resonance.systems.generators;
 
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
-import com.hypixel.hytale.component.spatial.SpatialResource;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
-import com.hypixel.hytale.server.core.modules.entity.EntityModule;
 import com.hypixel.hytale.server.core.modules.entity.item.ItemComponent;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
@@ -14,9 +12,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.systems.EssenceGeneratorSystems;
-import com.tschm.resonance.util.DebugHelper;
 import com.tschm.resonance.util.SystemsHelper;
-import it.unimi.dsi.fastutil.objects.ObjectList;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -35,12 +31,11 @@ public class CarbonAttunementStoneSystems {
             assert compCAS != null;
 
             final World world = commandBuffer.getExternalData().getWorld();
+            final Vector3i blockPos = SystemsHelper.getPosForBlock(archetypeChunk, idx, commandBuffer);
+            assert blockPos != null;
 
             // Check if we need to find a new item
             if (compCAS.remainingBurnEssence <= 0) {
-                Vector3i blockPos = SystemsHelper.getPosForBlock(archetypeChunk, idx, commandBuffer);
-                assert blockPos != null;
-
                 world.execute(() -> {
                     Store<EntityStore> entityStore = world.getEntityStore().getStore();
 
@@ -63,6 +58,7 @@ public class CarbonAttunementStoneSystems {
                         long totalEssence = (long) (compCAS.essencePerFuelQuality * fuelQuality);
                         int totalTicks = (int) (compCAS.burnTicksPerFuelQuality * fuelQuality);
 
+                        // Update component data
                         compCAS.remainingBurnEssence = totalEssence;
                         compCAS.currentEssencePerTick = totalEssence / totalTicks;
                         if (compStorage != null)
@@ -80,11 +76,17 @@ public class CarbonAttunementStoneSystems {
                 });
             }
 
-            // If there is something burning up add
-            if (compCAS.remainingBurnEssence > 0) {
+            final boolean isActive = compCAS.remainingBurnEssence > 0;
+            world.execute(() -> {
+                updateGeneratorBlockState(isActive, world, blockPos, compCAS);
+            });
+
+            // If there is something burning up, generate new RE in bound storage
+            if (isActive) {
                 long essenceProducedThisTick = Math.min(compCAS.currentEssencePerTick, compCAS.remainingBurnEssence);
-                compCAS.remainingBurnEssence -= essenceProducedThisTick;
-                supplyEssenceToBoundStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
+                long inserted = super.supplyEssenceToBoundStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
+
+                compCAS.remainingBurnEssence -= inserted;
             }
         }
 

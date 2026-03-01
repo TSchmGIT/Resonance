@@ -78,7 +78,7 @@ public class ResonantDisrupterSystems {
                 // Until the operation is completed pretend the block was not broken
                 commandBuffer.run(cs -> {
                     final boolean brokeBlock = damageBlockWithDrops(world, currentSearchPos, compRD.damagePerOperation);
-                    compStorage.extractEssence(compRD.essencePerOperation, false);
+                    compStorage.removeEssence(compRD.essencePerOperation, false);
 
                     if (brokeBlock) {
                         compRD.advanceCurrentBlockIndex();

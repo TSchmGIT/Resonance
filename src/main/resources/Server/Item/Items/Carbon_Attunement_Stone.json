@@ -15,7 +15,7 @@
     "CustomModel": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone.png",
+        "Texture": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_Off.png",
         "Weight": 1
       }
     ],
@@ -26,6 +26,29 @@
       }
     },
     "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Off": {
+          "CustomModelAnimation": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_On.blockyanim",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_Off.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "On": {
+          "CustomModelAnimation": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_On.blockyanim",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_On.png",
+              "Weight": 1
+            }
+          ],
+          "Looping": true
+        }
+      }
+    },
     "VariantRotation": "NESW"
   },
   "Icon": "Icons/ItemsGenerated/Carbon_Attunement_Stone.png",

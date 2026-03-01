@@ -16,11 +16,11 @@ public interface IEssenceStorage {
 
     boolean canExtract();
 
-    long receiveEssence(long paramLong, boolean paramBoolean);
+    long addEssence(long paramLong, boolean paramBoolean);
 
     long receiveEssenceInternal(long paramLong, boolean paramBoolean);
 
-    long extractEssence(long paramLong, boolean paramBoolean);
+    long removeEssence(long paramLong, boolean paramBoolean);
 
     long extractEssenceInternal(long paramLong, boolean paramBoolean);
 

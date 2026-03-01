@@ -16,10 +16,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
-import com.tschm.resonance.util.ComponentHelper;
-import com.tschm.resonance.util.DebugHelper;
-import com.tschm.resonance.util.SetBlockFlag;
-import com.tschm.resonance.util.SystemsHelper;
+import com.tschm.resonance.util.*;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
@@ -27,7 +24,7 @@ public class EssenceStorageSystems {
     // Updates the block state of the visualizer
     public static class EssenceStorageVisualizerSystem extends EntityTickingSystem<ChunkStore> {
 
-        // The amount of levels possible in the visual representation
+        // The number of levels possible in the visual representation
         private static final int LEVEL_COUNT = 4;
 
         @Override
@@ -47,54 +44,10 @@ public class EssenceStorageSystems {
 
             compVisualizer.setCurrentLevel(newLevel);
 
-            Ref<ChunkStore> ref = archetypeChunk.getReferenceTo(idx);
-            BlockModule.BlockStateInfo info = (BlockModule.BlockStateInfo) commandBuffer.getComponent(ref, BlockModule.BlockStateInfo.getComponentType());
-            if (info == null) {
-                DebugHelper.Print("info null");
-                return;
-            }
-            WorldChunk worldChunk = (WorldChunk) commandBuffer.getComponent(info.getChunkRef(), WorldChunk.getComponentType());
-            if (worldChunk == null) {
-                DebugHelper.Print("worldChunk null");
-                return;
-            }
-
-            BlockType current = worldChunk.getBlockType(targetBlock);
-            if (current == null) {
-                DebugHelper.Print("OldBlockType null");
-                return;
-            }
-
-            String newState = "Lvl" + newLevel;
-            String newBlockKey = current.getBlockKeyForState(newState);
-            if (newBlockKey == null) {
-                DebugHelper.Print("BlockKey null");
-                return;
-            }
-
-            int newBlockId = BlockType.getAssetMap().getIndex(newBlockKey);
-            if (newBlockId == Integer.MIN_VALUE) {
-                DebugHelper.Print("BlockId null");
-                return;
-            }
-
-            BlockType newBlockType = (BlockType) BlockType.getAssetMap().getAsset(newBlockId);
-            if (newBlockType == null) {
-                DebugHelper.Print("NewBlockType null");
-                return;
-            }
-
-            commandBuffer.run(cs -> {
-                int rotation = worldChunk.getRotationIndex(targetBlock.x, targetBlock.y, targetBlock.z);
-
-                // Copy the same settings as ChangeStateInteraction
-                int settings = SetBlockFlag.of(
-                        SetBlockFlag.DO_BLOCK_UPDATES,
-                        SetBlockFlag.SKIP_STATE_AND_BLOCK_ENTITY,
-                        SetBlockFlag.SKIP_PARTICLES,
-                        SetBlockFlag.SKIP_BREAK_OLD_FILLER_BLOCKS);
-
-                worldChunk.setBlock(targetBlock.x, targetBlock.y, targetBlock.z, newBlockId, newBlockType, rotation, 0, settings);
+            World world = commandBuffer.getExternalData().getWorld();
+            world.execute(() -> {
+                String newState = "Lvl" + newLevel;
+                BlockHelper.activateBlockState(newState, world, targetBlock);
             });
         }
 

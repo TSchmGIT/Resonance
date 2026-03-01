@@ -15,9 +15,7 @@ import com.hypixel.hytale.server.core.asset.type.blocktype.config.Rotation;
 import com.hypixel.hytale.server.core.asset.type.blocktype.config.RotationTuple;
 import com.hypixel.hytale.server.core.asset.type.item.config.CraftingRecipe;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
-import com.hypixel.hytale.server.core.entity.InteractionChain;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
-import com.hypixel.hytale.server.core.entity.InteractionEntry;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.MaterialQuantity;
 import com.hypixel.hytale.server.core.inventory.ResourceQuantity;
@@ -211,10 +209,10 @@ public class RitualStoneInteraction extends SimpleBlockInteraction {
         // Update essence
         for (MaterialQuantity input : craftingRecipe.getInput()) {
             if (Objects.equals(input.getResourceTypeId(), "Resonant_Essence")) {
-                final long extractedEssence = compStorage.extractEssence((long) input.getQuantity(), true);
+                final long extractedEssence = compStorage.removeEssence((long) input.getQuantity(), true);
                 if (extractedEssence < input.getQuantity())
                     return false;
-                compStorage.extractEssence(extractedEssence, false);
+                compStorage.removeEssence(extractedEssence, false);
                 break;
             }
         }

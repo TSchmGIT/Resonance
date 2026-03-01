@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 public abstract class EssenceGeneratorComponent implements Component<ChunkStore> {
     public static final BuilderCodec<EssenceGeneratorComponent> CODEC;
 
+    public boolean active = false;
     @Nullable
     public Vector3i boundStoragePos = null;
 
@@ -42,6 +43,7 @@ public abstract class EssenceGeneratorComponent implements Component<ChunkStore>
 
     static {
         CODEC = BuilderCodec.abstractBuilder(EssenceGeneratorComponent.class, null)
+                .append(new KeyedCodec<>("Active", BuilderCodec.BOOLEAN), (c, v) -> c.active = v, c -> c.active).add()
                 .append(new KeyedCodec<>("BoundStoragePos", Vector3i.CODEC), (c, v) -> c.boundStoragePos = v, c -> c.boundStoragePos).add()
                 .build();
     }

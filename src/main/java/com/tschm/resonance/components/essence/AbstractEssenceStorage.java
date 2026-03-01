@@ -25,14 +25,14 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
      *         simulation mode), {@code false} otherwise.
      */
     public static boolean transferEssence(IEssenceStorage from, IEssenceStorage to, long amount, boolean simulate) {
-        final long possibleExtracted = from.extractEssence(amount, true);
-        final long possibleInserted = to.receiveEssence(amount, true);
+        final long possibleExtracted = from.removeEssence(amount, true);
+        final long possibleInserted = to.addEssence(amount, true);
         if (possibleExtracted < amount || possibleExtracted != possibleInserted)
             return false;
 
         if (!simulate) {
-            final long extracted = from.extractEssence(amount, false);
-            final long inserted = to.receiveEssence(extracted, false);
+            final long extracted = from.removeEssence(amount, false);
+            final long inserted = to.addEssence(extracted, false);
             assert extracted == amount && extracted == inserted;
         }
 
@@ -93,7 +93,7 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
         return (this.maxExtract > 0L && this.essenceStored > 0L);
     }
 
-    public long receiveEssence(long amount, boolean simulate) {
+    public long addEssence(long amount, boolean simulate) {
         if (amount <= 0L)
             return 0L;
         if (!canReceive())
@@ -107,7 +107,7 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
         return inserted;
     }
 
-    public long extractEssence(long amount, boolean simulate) {
+    public long removeEssence(long amount, boolean simulate) {
         if (amount <= 0L)
             return 0L;
         if (!canExtract())
