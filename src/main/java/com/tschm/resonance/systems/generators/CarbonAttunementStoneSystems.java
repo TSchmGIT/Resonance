@@ -84,9 +84,11 @@ public class CarbonAttunementStoneSystems {
             // If there is something burning up, generate new RE in bound storage
             if (isActive) {
                 long essenceProducedThisTick = Math.min(compCAS.currentEssencePerTick, compCAS.remainingBurnEssence);
-                long inserted = super.supplyEssenceToBoundStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
+                super.supplyEssenceToBoundStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
 
-                compCAS.remainingBurnEssence -= inserted;
+                // Regardless of whether we produced any RE, we burned up some fuel
+                // Else we end up with an endless burn process
+                compCAS.remainingBurnEssence -= essenceProducedThisTick;
             }
         }
 

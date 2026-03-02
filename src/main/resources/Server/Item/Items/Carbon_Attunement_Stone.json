@@ -29,7 +29,6 @@
     "State": {
       "Definitions": {
         "Off": {
-          "CustomModelAnimation": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_On.blockyanim",
           "CustomModelTexture": [
             {
               "Texture": "Blocks/Carbon_Attunement_Stone/Carbon_Attunement_Stone_Off.png",
@@ -45,7 +44,12 @@
               "Weight": 1
             }
           ],
-          "Looping": true
+          "Looping": true,
+          "Particles": [
+            {
+              "SystemId": "Carbon_Attunement_Stone_On"
+            }
+          ]
         }
       }
     },
