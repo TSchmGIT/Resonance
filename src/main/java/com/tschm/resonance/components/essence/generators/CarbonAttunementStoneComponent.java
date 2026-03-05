@@ -4,7 +4,6 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.validation.Validators;
 import com.hypixel.hytale.component.ComponentType;
-import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 
@@ -29,8 +28,7 @@ public class CarbonAttunementStoneComponent extends EssenceGeneratorComponent {
     public CarbonAttunementStoneComponent() {
     }
 
-    public CarbonAttunementStoneComponent(Vector3i boundStoragePos, long essencePerFuelQuality, int burnTicksPerFuelQuality, long remainingBurnTicks, long currentEssencePerTick) {
-        super(boundStoragePos);
+    public CarbonAttunementStoneComponent(long essencePerFuelQuality, int burnTicksPerFuelQuality, long remainingBurnTicks, long currentEssencePerTick) {
         this.essencePerFuelQuality = essencePerFuelQuality;
         this.burnTicksPerFuelQuality = burnTicksPerFuelQuality;
         this.remainingBurnEssence = remainingBurnTicks;
@@ -39,7 +37,7 @@ public class CarbonAttunementStoneComponent extends EssenceGeneratorComponent {
 
     @Override
     protected EssenceGeneratorComponent cloneImpl() {
-        return new CarbonAttunementStoneComponent(this.boundStoragePos, this.essencePerFuelQuality, this.burnTicksPerFuelQuality, this.remainingBurnEssence, this.currentEssencePerTick);
+        return new CarbonAttunementStoneComponent(this.essencePerFuelQuality, this.burnTicksPerFuelQuality, this.remainingBurnEssence, this.currentEssencePerTick);
     }
 
     static {

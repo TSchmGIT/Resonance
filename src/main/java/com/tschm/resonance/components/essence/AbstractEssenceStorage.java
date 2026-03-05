@@ -16,51 +16,37 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
      * source and target essence storages. Can optionally simulate the transfer
      * without performing it.
      *
-     * @param from The source essence storage from which essence will be extracted.
-     * @param to The target essence storage to which essence will be transferred.
-     * @param amount The amount of essence to transfer.
+     * @param from     The source essence storage from which essence will be extracted.
+     * @param to       The target essence storage to which essence will be transferred.
+     * @param amount   The amount of essence to transfer.
      * @param simulate If true, the transfer will only be simulated and no actual
      *                 changes will be made to the storages.
      * @return {@code true} if the transfer is possible (or would be possible in
-     *         simulation mode), {@code false} otherwise.
+     * simulation mode), {@code false} otherwise.
      */
-    public static boolean transferEssence(IEssenceStorage from, IEssenceStorage to, long amount, boolean simulate) {
+    public static long transferEssence(IEssenceStorage from, IEssenceStorage to, long amount, boolean simulate) {
         final long possibleExtracted = from.removeEssence(amount, true);
-        final long possibleInserted = to.addEssence(amount, true);
-        if (possibleExtracted < amount || possibleExtracted != possibleInserted)
-            return false;
+        final long possibleInserted = to.addEssence(possibleExtracted, true);
 
         if (!simulate) {
-            final long extracted = from.removeEssence(amount, false);
-            final long inserted = to.addEssence(extracted, false);
-            assert extracted == amount && extracted == inserted;
+            final long extracted = from.removeEssence(possibleInserted, false);
+            final long inserted = to.addEssence(possibleInserted, false);
+            assert extracted == possibleInserted && inserted == possibleInserted;
         }
 
-        return true;
+        return possibleInserted;
     }
 
 
-    protected long essenceStored;
+    protected long essenceStored = 0L;
 
-    protected long maxEssence;
+    protected long maxEssence = Long.MAX_VALUE;
 
-    protected long maxReceive;
+    protected long maxReceive = Long.MAX_VALUE;
 
-    protected long maxExtract;
+    protected long maxExtract = Long.MAX_VALUE;
 
     protected AbstractEssenceStorage() {
-        this(0L, 10000L, 1000L, 1000L);
-    }
-
-    protected AbstractEssenceStorage(long essenceStored, long maxEssence, long maxReceive, long maxExtract) {
-        if (maxEssence <= 0L)
-            throw new IllegalArgumentException("maxEssence must be > 0");
-        if (essenceStored < 0L)
-            throw new IllegalArgumentException("essenceStored must be >= 0");
-        this.maxEssence = maxEssence;
-        this.essenceStored = Math.min(essenceStored, maxEssence);
-        this.maxReceive = Math.max(0L, maxReceive);
-        this.maxExtract = Math.max(0L, maxExtract);
     }
 
     public long getEssenceStored() {
@@ -74,6 +60,7 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
     public long getMaxReceive() {
         return this.maxReceive;
     }
+
     public void setMaxReceive(long maxReceive) {
         this.maxReceive = maxReceive;
     }
@@ -81,6 +68,7 @@ public abstract class AbstractEssenceStorage implements IEssenceStorage {
     public long getMaxExtract() {
         return this.maxExtract;
     }
+
     public void setMaxExtract(long maxExtract) {
         this.maxExtract = maxExtract;
     }

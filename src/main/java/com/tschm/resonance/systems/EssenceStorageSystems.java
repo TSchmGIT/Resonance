@@ -2,29 +2,46 @@ package com.tschm.resonance.systems;
 
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
-import com.hypixel.hytale.component.system.EntityEventSystem;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
 import com.hypixel.hytale.math.vector.Vector3i;
-import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
-import com.hypixel.hytale.server.core.event.events.ecs.PlaceBlockEvent;
-import com.hypixel.hytale.server.core.inventory.ItemStack;
-import com.hypixel.hytale.server.core.modules.block.BlockModule;
-import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
-import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
-import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.tschm.resonance.components.essence.AbstractEssenceStorage;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
 import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.util.*;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
 public class EssenceStorageSystems {
-    // Updates the block state of the visualizer
+
+    /** Pushes RE from every EssenceStorage with canSend=true to its boundReceiverList each tick. */
+    public static class EssenceStorageTransferSystem extends EntityTickingSystem<ChunkStore> {
+
+        @Override
+        public void tick(float v, int idx, @NonNullDecl ArchetypeChunk<ChunkStore> archetypeChunk, @NonNullDecl Store<ChunkStore> store, @NonNullDecl CommandBuffer<ChunkStore> commandBuffer) {
+            EssenceStorageComponent compStorage = archetypeChunk.getComponent(idx, EssenceStorageComponent.getComponentType());
+            if (compStorage == null || !compStorage.canSend || compStorage.isEmpty())
+                return;
+
+            World world = commandBuffer.getExternalData().getWorld();
+            for (Vector3i boundPos : compStorage.getBoundReceiverList()) {
+                EssenceStorageComponent compReceiver = ComponentHelper.findComponentAt(world, boundPos, EssenceStorageComponent.getComponentType());
+                if (compReceiver == null)
+                    continue;
+
+                AbstractEssenceStorage.transferEssence(compStorage, compReceiver, compStorage.getMaxExtract(), false);
+            }
+        }
+
+        @Override
+        public Query<ChunkStore> getQuery() {
+            return EssenceStorageComponent.getComponentType();
+        }
+    }
+
+    /** Updates the fill-level block state of storage blocks that have a visualizer component. */
     public static class EssenceStorageVisualizerSystem extends EntityTickingSystem<ChunkStore> {
 
-        // The number of levels possible in the visual representation
         private static final int LEVEL_COUNT = 4;
 
         @Override
@@ -38,7 +55,6 @@ public class EssenceStorageSystems {
             }
 
             int newLevel = (int) Math.floor(compStorage.getFillRatio() * LEVEL_COUNT);
-            // Skip if no change is required
             if (compVisualizer.getCurrentLevel() == newLevel)
                 return;
 
@@ -51,11 +67,9 @@ public class EssenceStorageSystems {
             });
         }
 
-        @NullableDecl
         @Override
         public Query<ChunkStore> getQuery() {
             return Query.and(EssenceStorageComponent.getComponentType(), EssenceStorageVisualizerComponent.getComponentType());
         }
     }
-
 }

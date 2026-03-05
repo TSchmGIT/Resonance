@@ -5,12 +5,10 @@ import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
 import com.hypixel.hytale.codec.validation.Validators;
 import com.hypixel.hytale.component.ComponentType;
-import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 
 import javax.annotation.Nullable;
-
 public class SolarAttunementStoneComponent extends EssenceGeneratorComponent {
     public static final BuilderCodec<SolarAttunementStoneComponent> CODEC;
     private static ComponentType<ChunkStore, SolarAttunementStoneComponent> type;
@@ -31,8 +29,7 @@ public class SolarAttunementStoneComponent extends EssenceGeneratorComponent {
     public SolarAttunementStoneComponent() {
     }
 
-    public SolarAttunementStoneComponent(Vector3i boundStoragePos, int ticksPerCycle, long productionPerCycle, int lastProductionTimestamp) {
-        super(boundStoragePos);
+    public SolarAttunementStoneComponent(int ticksPerCycle, long productionPerCycle, int lastProductionTimestamp) {
         this.ticksPerCycle = ticksPerCycle;
         this.productionPerCycle = productionPerCycle;
         this.remainingTicksUntilGeneration = lastProductionTimestamp;
@@ -41,7 +38,7 @@ public class SolarAttunementStoneComponent extends EssenceGeneratorComponent {
     @Nullable
     @Override
     protected EssenceGeneratorComponent cloneImpl() {
-        return new SolarAttunementStoneComponent(this.boundStoragePos, this.ticksPerCycle, this.productionPerCycle, this.remainingTicksUntilGeneration);
+        return new SolarAttunementStoneComponent(this.ticksPerCycle, this.productionPerCycle, this.remainingTicksUntilGeneration);
     }
 
     static {

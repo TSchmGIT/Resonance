@@ -62,7 +62,7 @@ public class CarbonAttunementStoneSystems {
                         compCAS.remainingBurnEssence = totalEssence;
                         compCAS.currentEssencePerTick = totalEssence / totalTicks;
                         if (compStorage != null)
-                            compStorage.setMaxExtract(compCAS.currentEssencePerTick);
+                            compStorage.setMaxExtract(compCAS.currentEssencePerTick * 2);
 
                         // Reduce the ItemStack by 1
                         if (itemStack.getQuantity() == 1)
@@ -84,7 +84,7 @@ public class CarbonAttunementStoneSystems {
             // If there is something burning up, generate new RE in bound storage
             if (isActive) {
                 long essenceProducedThisTick = Math.min(compCAS.currentEssencePerTick, compCAS.remainingBurnEssence);
-                super.supplyEssenceToBoundStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
+                super.supplyEssenceToStorage(world, archetypeChunk, idx, compCAS, essenceProducedThisTick);
 
                 // Regardless of whether we produced any RE, we burned up some fuel
                 // Else we end up with an endless burn process
@@ -95,7 +95,7 @@ public class CarbonAttunementStoneSystems {
         @Nullable
         @Override
         public Query<ChunkStore> getQuery() {
-            return CarbonAttunementStoneComponent.getComponentType();
+            return Query.and(super.getQuery(),  CarbonAttunementStoneComponent.getComponentType());
         }
     }
 }
