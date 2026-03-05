@@ -7,11 +7,11 @@
       "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
       "shape": {
         "type": "box",
-        "offset": {"x": 0, "y": 12, "z": 0},
+        "offset": {"x": 0, "y": 18, "z": 0},
         "stretch": {"x": 1, "y": 1, "z": 1},
         "settings": {
           "isPiece": false,
-          "size": {"x": 6, "y": 4, "z": 6}
+          "size": {"x": 8, "y": 8, "z": 8}
         },
         "textureLayout": {
           "back": {
@@ -54,12 +54,12 @@
         {
           "id": "2",
           "name": "Basin",
-          "position": {"x": 0, "y": -12, "z": 0},
+          "position": {"x": 0, "y": -18, "z": 0},
           "orientation": {"x": 0, "y": 0, "z": 0, "w": 1},
           "shape": {
             "type": "none",
             "offset": {"x": 0, "y": 0, "z": 0},
-            "stretch": {"x": 0, "y": 0, "z": 0},
+            "stretch": {"x": 1, "y": 1, "z": 1},
             "settings": {
               "isPiece": false
             },
@@ -282,7 +282,7 @@
               "id": "7",
               "name": "cube--C5",
               "position": {"x": 0, "y": 0, "z": 0},
-              "orientation": {"x": 0.07606, "y": 0.85595, "z": -0.13174, "w": 0.49418},
+              "orientation": {"x": -0.07606, "y": -0.85595, "z": 0.13174, "w": -0.49418},
               "shape": {
                 "type": "box",
                 "offset": {"x": 0, "y": 12, "z": 5},
@@ -490,7 +490,7 @@
               "id": "11",
               "name": "cube--C9",
               "position": {"x": 0, "y": 0, "z": 0},
-              "orientation": {"x": 0.07606, "y": -0.85595, "z": 0.13174, "w": 0.49418},
+              "orientation": {"x": -0.07606, "y": 0.85595, "z": -0.13174, "w": -0.49418},
               "shape": {
                 "type": "box",
                 "offset": {"x": 0, "y": 12, "z": 5},
@@ -699,7 +699,7 @@
         {
           "id": "15",
           "name": "BottomCap--C1",
-          "position": {"x": -1, "y": -12, "z": 5},
+          "position": {"x": -1, "y": -18, "z": 5},
           "orientation": {"x": -0.70711, "y": 0, "z": 0, "w": 0.70711},
           "shape": {
             "type": "quad",

@@ -4,14 +4,18 @@
       "Components": {
         "Resonance_SolarAttunementStoneComponent": {
           "ProductionPerCycle": 1,
-          "TicksPerCycle": 25
+          "TicksPerCycle": 60
+        },
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 100,
+          "CanSend": true
         }
       }
     },
     "CustomModel": "Blocks/Solar_Attunement_Stone/Solar_Attunement_Stone.blockymodel",
     "CustomModelTexture": [
       {
-        "Texture": "Blocks/Solar_Attunement_Stone/Solar_Attunement_Stone.png",
+        "Texture": "Blocks/Solar_Attunement_Stone/Solar_Attunement_Stone_Off.png",
         "Weight": 1
       }
     ],
@@ -22,6 +26,32 @@
       }
     },
     "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Off": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Solar_Attunement_Stone/Solar_Attunement_Stone_Off.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "On": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Solar_Attunement_Stone/Solar_Attunement_Stone_On.png",
+              "Weight": 1
+            }
+          ],
+          "Looping": true,
+          "Particles": [
+            {
+              "SystemId": "Carbon_Attunement_Stone_On"
+            }
+          ]
+        }
+      }
+    },
     "VariantRotation": "NESW"
   },
   "Icon": "Icons/ItemsGenerated/Solar_Attunement_Stone.png",
