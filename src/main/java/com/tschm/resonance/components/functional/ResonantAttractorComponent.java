@@ -25,14 +25,22 @@ public class ResonantAttractorComponent implements Component<ChunkStore> {
     private double attractionRangeUnattuned = 1;
     private double attractionRangeAttuned = 4;
     public boolean isAttuned = false;
-    public double attractionSpeed = 0.05;
+    public double attractionSpeed = 0.02;
+
+    public byte tickAttractionStart = 9;
+    public byte tickAttractionEnd = 19;
+    public long activationTick = 0L;
+
+
+    public long essenceUsedPerTick = 10;
 
     public ResonantAttractorComponent() {}
-    public ResonantAttractorComponent(double attractionRangeUnattuned, double attractionRangeAttuned, boolean isAttuned, double attractionSpeed) {
+    public ResonantAttractorComponent(double attractionRangeUnattuned, double attractionRangeAttuned, boolean isAttuned, double attractionSpeed, long essenceUsedPerTick) {
         this.attractionRangeUnattuned = attractionRangeUnattuned;
         this.attractionRangeAttuned = attractionRangeAttuned;
         this.isAttuned = isAttuned;
         this.attractionSpeed = attractionSpeed;
+        this.essenceUsedPerTick = essenceUsedPerTick;
     }
 
     public double getAttractionRange() {
@@ -41,7 +49,7 @@ public class ResonantAttractorComponent implements Component<ChunkStore> {
 
     @Override
     public Component<ChunkStore> clone() {
-        return new ResonantAttractorComponent(attractionRangeUnattuned, attractionRangeAttuned, isAttuned, attractionSpeed);
+        return new ResonantAttractorComponent(attractionRangeUnattuned, attractionRangeAttuned, isAttuned, attractionSpeed, essenceUsedPerTick);
     }
 
     static {
@@ -57,6 +65,21 @@ public class ResonantAttractorComponent implements Component<ChunkStore> {
                 .append(new KeyedCodec<>("AttractionSpeed", BuilderCodec.DOUBLE), (c, v) -> c.attractionSpeed = v, c -> c.attractionSpeed)
                 .addValidator(Validators.greaterThan(0d))
                 .documentation("Speed at which items are attracted to the attractor").add()
+
+                .append(new KeyedCodec<>("EssenceUsedPerTick", BuilderCodec.LONG), (c, v) -> c.essenceUsedPerTick = v, c -> c.essenceUsedPerTick)
+                .addValidator(Validators.greaterThanOrEqual(0L))
+                .documentation("Amount of essence consumed per tick when moving an item").add()
+
+                .append(new KeyedCodec<>("TickAttractionStart", BuilderCodec.BYTE), (c, v) -> c.tickAttractionStart = v, c -> c.tickAttractionStart)
+                .addValidator(Validators.greaterThanOrEqual((byte)0))
+                .documentation("Tick at which attraction starts. Should be in aligned with animation").add()
+                .append(new KeyedCodec<>("TickAttractionEnd", BuilderCodec.BYTE), (c, v) -> c.tickAttractionEnd = v, c -> c.tickAttractionEnd)
+                .addValidator(Validators.greaterThanOrEqual((byte)0))
+                .documentation("Tick at which attraction ends. Should be in aligned with animation").add()
+                .append(new KeyedCodec<>("ActivationTick", BuilderCodec.LONG), (c, v) -> c.activationTick = v, c -> c.activationTick)
+                .addValidator(Validators.greaterThanOrEqual(0L))
+                .documentation("Tick at which attraction starts. Should be in aligned with animation").add()
+
                 .build();
     }
 }

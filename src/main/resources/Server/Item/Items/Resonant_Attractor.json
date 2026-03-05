@@ -3,12 +3,18 @@
     "BlockEntity": {
       "Components": {
         "Resonance_EssenceStorage": {
-          "MaxEssence": 1000
+          "MaxEssence": 1000,
+          "MaxReceive": 20,
+          "CanSend": false,
+          "CanReceive": true
         },
         "Resonance_ResonantAttractor": {
           "AttractionRangeUnattuned": 5,
           "AttractionRangeAttuned": 7,
-          "AttractionSpeed": 0.05
+          "AttractionSpeed": 0.02,
+          "TimeAttractionStart": 9,
+          "TimeAttractionEnd": 19,
+          "EssenceUsedPerTick": 10
         },
         "Resonance_EchoStorageComponent": {
           "CanSend": true,
@@ -30,6 +36,15 @@
       }
     },
     "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Off": {},
+        "On": {
+          "CustomModelAnimation": "Blocks/Resonant_Attractor/Resonant_Attractor_On.blockyanim",
+          "Looping": true
+        }
+      }
+    },
     "VariantRotation": "NESW"
   },
   "Icon": "Icons/ItemsGenerated/Resonant_Attractor.png",
