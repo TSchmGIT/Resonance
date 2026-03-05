@@ -17,6 +17,10 @@
       },
       {
         "ItemId": "Echo_Of_Power"
+      },
+      {
+        "ItemId": "Resonant_Essence",
+        "Quantity": 10000
       }
     ],
     "BenchRequirement": [

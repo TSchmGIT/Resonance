@@ -25,6 +25,10 @@
       {
         "ItemId": "Echo_Shard",
         "Quantity": 1
+      },
+      {
+        "ResourceTypeId": "Resonant_Essence",
+        "Quantity": 700
       }
     ],
     "BenchRequirement": [

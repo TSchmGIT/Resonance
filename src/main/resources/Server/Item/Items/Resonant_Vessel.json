@@ -3,7 +3,9 @@
     "BlockEntity": {
       "Components": {
         "Resonance_EssenceStorage": {
-          "MaxEssence": 1000000
+          "MaxEssence": 10000,
+          "CanSend": true,
+          "CanReceive": true
         },
         "Resonance_EssenceStorageVisualizer": {}
       }
