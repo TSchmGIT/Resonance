@@ -10,7 +10,9 @@ import com.hypixel.hytale.math.vector.Vector3d;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.modules.entity.EntityModule;
+import com.hypixel.hytale.server.core.universe.world.chunk.BlockChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.ChunkColumn;
+import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.section.ChunkSection;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
@@ -31,25 +33,21 @@ public class SystemsHelper {
      */
     @Nullable
     public static Vector3i getPosForBlock(ArchetypeChunk<ChunkStore> archetypeChunk, int idx, ComponentAccessor<ChunkStore> componentAccessor) {
-        BlockModule.BlockStateInfo info = archetypeChunk.getComponent(idx, BlockModule.BlockStateInfo.getComponentType());
-        if (info == null)
+        BlockModule.BlockStateInfo blockInfo = archetypeChunk.getComponent(idx, BlockModule.BlockStateInfo.getComponentType());
+        if (blockInfo == null)
             return null;
 
-        int x = ChunkUtil.xFromBlockInColumn(info.getIndex());
-        int y = ChunkUtil.yFromBlockInColumn(info.getIndex());
-        int z = ChunkUtil.zFromBlockInColumn(info.getIndex());
-        ChunkColumn column = componentAccessor.getComponent(info.getChunkRef(), ChunkColumn.getComponentType());
-        Ref<ChunkStore> sectionRef = column != null ? column.getSection(ChunkUtil.chunkCoordinate(y)) : null;
-        assert sectionRef != null;
+        Ref<ChunkStore> chunkRef = blockInfo.getChunkRef();
+        if (!chunkRef.isValid())
+            return null;
 
-        ChunkSection chunkSection = componentAccessor.getComponent(sectionRef, ChunkSection.getComponentType());
+        BlockChunk blockChunk = chunkRef.getStore().getComponent(chunkRef, BlockChunk.getComponentType());
+        if (blockChunk == null)
+            return null;
 
-        assert chunkSection != null;
-
-        int worldX = ChunkUtil.worldCoordFromLocalCoord(chunkSection.getX(), x);
-        int worldY = ChunkUtil.worldCoordFromLocalCoord(chunkSection.getY(), y);
-        int worldZ = ChunkUtil.worldCoordFromLocalCoord(chunkSection.getZ(), z);
-
+        int worldX = blockChunk.getX() << 5 | ChunkUtil.xFromBlockInColumn(blockInfo.getIndex());
+        int worldY = ChunkUtil.yFromBlockInColumn(blockInfo.getIndex());
+        int worldZ = blockChunk.getZ() << 5 | ChunkUtil.zFromBlockInColumn(blockInfo.getIndex());
         return new Vector3i(worldX, worldY, worldZ);
     }
 
