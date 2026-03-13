@@ -18,6 +18,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
+import com.tschm.resonance.components.essence.generators.VerdantAttunementStoneComponent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -70,6 +71,7 @@ public class ComponentHelper {
         EssenceGeneratorComponent comp = null;
         comp = blockComponentChunk.getComponent(blockIndexColumn, SolarAttunementStoneComponent.getComponentType());
         comp = comp != null ? comp : blockComponentChunk.getComponent(blockIndexColumn, CarbonAttunementStoneComponent.getComponentType());
+        comp = comp != null ? comp : blockComponentChunk.getComponent(blockIndexColumn, VerdantAttunementStoneComponent.getComponentType());
 
         return comp;
     }

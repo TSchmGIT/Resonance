@@ -1,7 +1,20 @@
 {
   "BlockType": {
     "BlockEntity": {
-      "Components": {}
+      "Components": {
+        "Resonance_VerdantAttunementStoneComponent": {
+          "TicksPerCycle": 1,
+          "ProductionPerCycle": 10,
+          "MaxMultiplier": 20.0,
+          "MaxVariety": 13,
+          "ScanRadius": 5,
+          "ScanInterval": 30
+        },
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 100000,
+          "CanSend": true
+        }
+      }
     },
     "CustomModel": "Blocks/Verdant_Attunement_Stone/Verdant_Attunement_Stone.blockymodel",
     "CustomModelTexture": [
@@ -17,6 +30,32 @@
       }
     },
     "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Off": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Verdant_Attunement_Stone/Verdant_Attunement_Stone.png",
+              "Weight": 1
+            }
+          ]
+        },
+        "On": {
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Verdant_Attunement_Stone/Verdant_Attunement_Stone.png",
+              "Weight": 1
+            }
+          ],
+          "Looping": true,
+          "Particles": [
+            {
+              "SystemId": "Attunement_Stone_On"
+            }
+          ]
+        }
+      }
+    },
     "VariantRotation": "NESW"
   },
   "Icon": "Icons/ItemsGenerated/Verdant_Attunement_Stone.png",
