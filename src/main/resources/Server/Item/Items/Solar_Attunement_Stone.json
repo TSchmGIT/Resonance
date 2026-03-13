@@ -46,7 +46,7 @@
           "Looping": true,
           "Particles": [
             {
-              "SystemId": "Carbon_Attunement_Stone_On"
+              "SystemId": "Attunement_Stone_On"
             }
           ]
         }

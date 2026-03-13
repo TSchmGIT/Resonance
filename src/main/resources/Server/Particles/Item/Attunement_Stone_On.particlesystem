@@ -1,7 +1,7 @@
 {
   "Spawners": [
     {
-      "SpawnerId": "Carbon_Attunement_Stone_On",
+      "SpawnerId": "Attunement_Stone_On_Spawner",
       "RotationOffset": {
         "Pitch": 90
       }
