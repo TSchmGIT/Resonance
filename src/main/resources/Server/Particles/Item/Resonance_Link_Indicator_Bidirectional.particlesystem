@@ -1,0 +1,11 @@
+{
+  "Spawners": [
+    {
+      "SpawnerId": "Resonance_Link_Indicator_Bidirectional_Spawner",
+      "RotationOffset": {
+        "Pitch": 90
+      }
+    }
+  ],
+  "IsImportant": false
+}

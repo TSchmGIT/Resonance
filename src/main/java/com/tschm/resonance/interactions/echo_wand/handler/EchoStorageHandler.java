@@ -1,13 +1,17 @@
 package com.tschm.resonance.interactions.echo_wand.handler;
 
+import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.storage.EchoStorageComponent;
+import com.tschm.resonance.config.LinkIndicatorConfig;
 import com.tschm.resonance.interactions.echo_wand.EchoWandInteraction;
 import com.tschm.resonance.interactions.echo_wand.WandInteractionHandler;
 import com.tschm.resonance.metadata.EchoWandMetaData;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
+import com.tschm.resonance.util.LinkIndicatorSpawner;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,13 +28,13 @@ public class EchoStorageHandler implements WandInteractionHandler {
     }
 
     @Override
-    public Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target) {
+    public Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target, CommandBuffer<EntityStore> commandBuffer) {
         EchoStorageComponent comp = target.echoStorage();
         assert comp != null;
 
         return switch (metaData.getWandState()) {
             case None -> handleState_None(targetPos, metaData, comp);
-            case Bound -> handleState_Bound(world, targetPos, metaData, comp);
+            case Bound -> handleState_Bound(world, targetPos, metaData, comp, commandBuffer);
         };
     }
 
@@ -43,7 +47,7 @@ public class EchoStorageHandler implements WandInteractionHandler {
         return Optional.empty();
     }
 
-    private static Optional<String> handleState_Bound(World world, Vector3i targetPos, EchoWandMetaData metaData, @Nonnull EchoStorageComponent comp) {
+    private static Optional<String> handleState_Bound(World world, Vector3i targetPos, EchoWandMetaData metaData, @Nonnull EchoStorageComponent comp, CommandBuffer<EntityStore> commandBuffer) {
         if (metaData.getBindingType() != EchoWandMetaData.EchoWandBindingType.EchoStorage)
             return Optional.of("Can only bind this Echo Storage to another Echo Storage!");
 
@@ -59,6 +63,7 @@ public class EchoStorageHandler implements WandInteractionHandler {
             return Optional.of("Selected Echo storage cannot store essence!");
 
         createEchoStorageBinding(world, boundEchoStorage, boundPos, comp, targetPos);
+        LinkIndicatorSpawner.spawnIndicator(commandBuffer, boundPos, targetPos, LinkIndicatorConfig.LinkType.BIDIRECTIONAL);
         // Note: metaData is intentionally NOT reset here (pre-existing behaviour)
         return Optional.empty();
     }

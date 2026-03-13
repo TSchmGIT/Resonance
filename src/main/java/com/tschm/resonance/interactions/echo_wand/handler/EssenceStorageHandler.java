@@ -1,13 +1,17 @@
 package com.tschm.resonance.interactions.echo_wand.handler;
 
+import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
+import com.tschm.resonance.config.LinkIndicatorConfig;
 import com.tschm.resonance.interactions.echo_wand.EchoWandInteraction;
 import com.tschm.resonance.interactions.echo_wand.WandInteractionHandler;
 import com.tschm.resonance.metadata.EchoWandMetaData;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.DebugHelper;
+import com.tschm.resonance.util.LinkIndicatorSpawner;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
@@ -23,18 +27,18 @@ public class EssenceStorageHandler implements WandInteractionHandler {
     }
 
     @Override
-    public Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target) {
+    public Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target, CommandBuffer<EntityStore> commandBuffer) {
         EssenceStorageComponent compStorage = target.essenceStorage();
         assert compStorage != null;
 
         return switch (metaData.getWandState()) {
             case None -> handleState_None(targetPos, metaData, compStorage);
-            case Bound -> handleState_Bound(world, targetPos, metaData, compStorage);
+            case Bound -> handleState_Bound(world, targetPos, metaData, compStorage, commandBuffer);
         };
     }
 
     @Nonnull
-    private static Optional<String> handleState_Bound(World world, Vector3i targetPos, EchoWandMetaData metaData, EssenceStorageComponent compStorage) {
+    private static Optional<String> handleState_Bound(World world, Vector3i targetPos, EchoWandMetaData metaData, EssenceStorageComponent compStorage, CommandBuffer<EntityStore> commandBuffer) {
         if (!compStorage.canReceive)
             return Optional.of("Target storage cannot receive essence!");
 
@@ -61,6 +65,7 @@ public class EssenceStorageHandler implements WandInteractionHandler {
             receivers.add(targetPos);
             compStorage.getBoundSenderList().add(boundPos);
             DebugHelper.Print("Linked storage at " + boundPos + " to " + targetPos);
+            LinkIndicatorSpawner.spawnIndicator(commandBuffer, boundPos, targetPos, LinkIndicatorConfig.LinkType.SEND);
         }
 
         metaData.resetBinding();

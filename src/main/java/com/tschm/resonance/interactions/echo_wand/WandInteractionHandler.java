@@ -1,7 +1,9 @@
 package com.tschm.resonance.interactions.echo_wand;
 
+import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.metadata.EchoWandMetaData;
 
 import java.util.Optional;
@@ -15,6 +17,8 @@ public interface WandInteractionHandler {
 
     /**
      * Returns {@link Optional#empty()} on success, or a user-facing error string on failure.
+     *
+     * @param commandBuffer entity command buffer — may be used to spawn feedback entities on success
      */
-    Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target);
+    Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target, CommandBuffer<EntityStore> commandBuffer);
 }

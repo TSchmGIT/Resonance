@@ -79,7 +79,7 @@ public class EchoWandInteraction extends SimpleBlockInteraction {
             if (!handler.isApplicable(target))
                 continue;
 
-            Optional<String> result = handler.handle(world, targetPos, metaData, target);
+            Optional<String> result = handler.handle(world, targetPos, metaData, target, commandBuffer);
             if (result.isEmpty()) {
                 lastError = null;
                 break;

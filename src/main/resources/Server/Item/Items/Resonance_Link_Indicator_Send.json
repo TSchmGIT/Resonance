@@ -1,0 +1,11 @@
+{
+  "TranslationProperties": {
+    "Name": "Link Indicator (Send)",
+    "Description": ""
+  },
+  "ItemEntity": {
+    "ParticleSystemId": "Resonance_Link_Indicator_Send"
+  },
+  "Model": "Items/Essence_Of_Echo/Essence_Of_Echo.blockymodel",
+  "PlayerAnimationsId": "Item"
+}

@@ -1,0 +1,9 @@
+{
+  "TranslationProperties": {
+    "Name": "Link Indicator (Receive)",
+    "Description": ""
+  },
+  "ItemEntity": {
+    "ParticleSystemId": "Resonance_Link_Indicator_Receive"
+  }
+}

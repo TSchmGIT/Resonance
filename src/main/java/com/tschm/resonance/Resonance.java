@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.world.events.ChunkPreLoadProcessEvent;
 import com.tschm.resonance.components.*;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
+import com.tschm.resonance.components.indicator.LinkIndicatorComponent;
 import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
 import com.tschm.resonance.components.essence.generators.SolarAttunementStoneComponent;
@@ -19,13 +20,16 @@ import com.tschm.resonance.components.functional.ResonantDisrupterComponent;
 import com.tschm.resonance.components.storage.EchoStorageComponent;
 import com.tschm.resonance.events.OreGenChunkEvent;
 import com.tschm.resonance.interactions.*;
+import com.tschm.resonance.interactions.echo_wand.EchoWandInteraction;
 import com.tschm.resonance.systems.EchoWandSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
+import com.tschm.resonance.systems.LinkIndicatorSystem;
 import com.tschm.resonance.systems.RitualStoneSystems;
 import com.tschm.resonance.systems.functional.ResonantAttractorSystems;
 import com.tschm.resonance.systems.functional.ResonantDisrupterSystems;
 import com.tschm.resonance.systems.generators.CarbonAttunementStoneSystems;
 import com.tschm.resonance.systems.generators.SolarAttunementStoneSystems;
+import com.tschm.resonance.systems.generators.VerdantAttunementStoneSystems;
 import com.tschm.resonance.systems.storage.EchoStorageSystems;
 
 import javax.annotation.Nonnull;
@@ -74,14 +78,19 @@ public class Resonance extends JavaPlugin {
 
         EchoStorageComponent.setComponentType(regChunk.registerComponent(EchoStorageComponent.class, "Resonance_EchoStorageComponent", EchoStorageComponent.CODEC));
 
+        LinkIndicatorComponent.setComponentType(regEntity.registerComponent(LinkIndicatorComponent.class, "Resonance_LinkIndicator", LinkIndicatorComponent.CODEC));
+
         // Systems
         regEntity.registerSystem(new RitualStoneSystems.BreakSystem());
         regEntity.registerSystem(new EchoWandSystems.HUDManager());
+        regEntity.registerSystem(new LinkIndicatorSystem());
 
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageTransferSystem());
         regChunk.registerSystem(new EssenceStorageSystems.EssenceStorageVisualizerSystem());
         regChunk.registerSystem(new SolarAttunementStoneSystems.GeneratorTicks());
         regChunk.registerSystem(new CarbonAttunementStoneSystems.GeneratorTicks());
+        regChunk.registerSystem(new VerdantAttunementStoneSystems.GeneratorTicks());
+        regChunk.registerSystem(new VerdantAttunementStoneSystems.PlaceBlockHandler());
 
         regChunk.registerSystem(new ResonantDisrupterSystems.TickingSystem());
         regChunk.registerSystem(new ResonantAttractorSystems.TickingSystem());
