@@ -11,7 +11,7 @@ public class DebugHelper {
     }
 
     public static void Print(String message, boolean withStackTrace) {
-        Universe.get().sendMessage(Message.raw(message));
+        Universe.get().getDefaultWorld().sendMessage(Message.raw(message));
         if (withStackTrace)
             Resonance.LOGGER.atInfo().withStackTrace(StackSize.FULL).log(message);
         else

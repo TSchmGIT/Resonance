@@ -32,7 +32,7 @@ public class ComponentHelper {
 
         // Retrieve world chunk
         final long indexChunk = ChunkUtil.indexChunkFromBlock(x, z);
-        WorldChunk worldChunk = world.getChunk(indexChunk);
+        WorldChunk worldChunk = world.getChunkIfLoaded(indexChunk);
         BlockComponentChunk blockComponentChunk = worldChunk != null ? worldChunk.getBlockComponentChunk() : null;
         if (worldChunk == null || worldChunk.getBlockType(pos) == null || blockComponentChunk == null) {
             return null;
@@ -58,7 +58,7 @@ public class ComponentHelper {
 
         // Retrieve world chunk
         final long indexChunk = ChunkUtil.indexChunkFromBlock(x, z);
-        WorldChunk worldChunk = world.getChunk(indexChunk);
+        WorldChunk worldChunk = world.getChunkIfLoaded(indexChunk);
         BlockComponentChunk blockComponentChunk = worldChunk != null ? worldChunk.getBlockComponentChunk() : null;
         if (worldChunk == null || worldChunk.getBlockType(pos) == null || blockComponentChunk == null) {
             return null;
