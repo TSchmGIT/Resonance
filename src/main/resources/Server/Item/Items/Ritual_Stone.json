@@ -57,7 +57,9 @@
     "VariantRotation": "NESW",
     "BlockEntity": {
       "Components": {
-        "Resonance_RitualStone": {},
+        "Resonance_RitualStone": {
+          "EndSoundEventId": "SFX_Ritual_Stone_Crafting_End"
+        },
         "Resonance_EssenceStorage": {
           "MaxEssence": 1000
         }

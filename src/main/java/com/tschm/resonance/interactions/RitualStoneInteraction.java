@@ -22,6 +22,7 @@ import com.hypixel.hytale.server.core.inventory.ResourceQuantity;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.client.SimpleBlockInteraction;
+import com.hypixel.hytale.server.core.universe.world.SoundUtil;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.chunk.BlockChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
@@ -155,11 +156,12 @@ public class RitualStoneInteraction extends SimpleBlockInteraction {
 
     private static boolean processRecipeInteraction(@NonNullDecl World world, @NonNullDecl CommandBuffer<EntityStore> commandBuffer, @NonNullDecl InteractionContext context, @NonNullDecl Vector3i targetBlock, RitualStoneComponent compRitualStone, EssenceStorageComponent compStorage) {
         CraftingRecipe craftingRecipe = findMatchingCraftingRecipe(compRitualStone, compStorage);
-        DebugHelper.Print(craftingRecipe != null ? "This would yield " + craftingRecipe.getPrimaryOutput().toString() : "There's nothing this would yield!");
 
         // Return if no recipe was found. Optional: Give feedback to player (sound, cfx, text, etc.)
-        if (craftingRecipe == null)
+        if (craftingRecipe == null) {
+            DebugHelper.Print("There's nothing this would yield!");
             return false;
+        }
 
         // Empty/Consume ritual stone inputs first
         RitualStoneComponent.Slot filledSlot = null;
@@ -216,6 +218,10 @@ public class RitualStoneInteraction extends SimpleBlockInteraction {
                 break;
             }
         }
+
+        // Play success sound
+        if (compRitualStone.getEndSoundEventIndex() != null)
+            SoundUtil.playSoundEvent2d(compRitualStone.getEndSoundEventIndex(), SoundCategory.SFX, commandBuffer);
 
         return true;
     }

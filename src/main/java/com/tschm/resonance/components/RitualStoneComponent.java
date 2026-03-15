@@ -10,6 +10,7 @@ import com.hypixel.hytale.protocol.BenchType;
 import com.hypixel.hytale.protocol.ItemResourceType;
 import com.hypixel.hytale.server.core.asset.type.item.config.CraftingRecipe;
 import com.hypixel.hytale.server.core.asset.type.item.config.Item;
+import com.hypixel.hytale.server.core.asset.type.soundevent.config.SoundEvent;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.MaterialQuantity;
 import com.hypixel.hytale.server.core.inventory.ResourceQuantity;
@@ -57,6 +58,11 @@ public class RitualStoneComponent implements Component<ChunkStore> {
     }
 
     @Nullable
+    private String endSoundEventId = null;
+    @Nullable
+    private Integer endSoundEventIndex = null;
+
+    @Nullable
     private ItemStack mainInput;
     @Nullable
     private UUID mainInputUUID;
@@ -72,18 +78,41 @@ public class RitualStoneComponent implements Component<ChunkStore> {
     public RitualStoneComponent() {
     }
 
-    public RitualStoneComponent(@Nullable ItemStack mainInput, @Nullable UUID mainInputUUID, @Nullable ItemStack catalystInput1, @Nullable UUID catalystInput1UUID, @Nullable ItemStack catalystInput2, @Nullable UUID catalystInput2UUID) {
+    public RitualStoneComponent(@Nullable ItemStack mainInput,
+                                @Nullable UUID mainInputUUID,
+                                @Nullable ItemStack catalystInput1,
+                                @Nullable UUID catalystInput1UUID,
+                                @Nullable ItemStack catalystInput2,
+                                @Nullable UUID catalystInput2UUID,
+                                @Nullable String endSoundEventId) {
         this.mainInput = mainInput;
         this.mainInputUUID = mainInputUUID;
         this.catalystInput1 = catalystInput1;
         this.catalystInput1UUID = catalystInput1UUID;
         this.catalystInput2 = catalystInput2;
         this.catalystInput2UUID = catalystInput2UUID;
+        this.endSoundEventId = endSoundEventId;
     }
 
     @Override
     public Component<ChunkStore> clone() {
-        return new RitualStoneComponent(this.mainInput, this.mainInputUUID, this.catalystInput1, this.catalystInput1UUID, this.catalystInput2, this.catalystInput2UUID);
+        return new RitualStoneComponent(
+                this.mainInput,
+                this.mainInputUUID,
+                this.catalystInput1,
+                this.catalystInput1UUID,
+                this.catalystInput2,
+                this.catalystInput2UUID,
+                this.endSoundEventId);
+    }
+
+    @Nullable
+    public String getEndSoundEventId() {
+        return endSoundEventId;
+    }
+    @Nullable
+    public Integer getEndSoundEventIndex() {
+        return endSoundEventIndex;
     }
 
     @Nullable
@@ -226,6 +255,15 @@ public class RitualStoneComponent implements Component<ChunkStore> {
                 .append(new KeyedCodec<>("CatalystInput2UUID", BuilderCodec.UUID_BINARY),
                         (component, uuid) -> component.catalystInput2UUID = uuid,
                         (component) -> component.catalystInput2UUID).add()
+                .append(new KeyedCodec<>("EndSoundEventId", BuilderCodec.STRING),
+                        (component, value) -> component.endSoundEventId = value,
+                        (component) -> component.endSoundEventId)
+                .documentation("The sound event ID to play when the ritual is completed.").add()
+                .afterDecode(p -> {
+                    if (p.endSoundEventId != null) {
+                        p.endSoundEventIndex = SoundEvent.getAssetMap().getIndex(p.endSoundEventId);
+                    }
+                })
                 .build();
     }
 }
