@@ -12,6 +12,9 @@ hytale-server/
 *.iml
 *.ipr
 
+### AI ###
+.claude/*
+
 ### Eclipse ###
 .apt_generated
 .classpath
