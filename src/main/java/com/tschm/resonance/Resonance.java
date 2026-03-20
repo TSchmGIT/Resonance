@@ -10,6 +10,7 @@ import com.hypixel.hytale.server.core.plugin.PluginManager;
 import com.hypixel.hytale.server.core.universe.world.events.ChunkPreLoadProcessEvent;
 import com.tschm.resonance.components.*;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
+import com.tschm.resonance.components.functional.HarmonicPulverizerComponent;
 import com.tschm.resonance.components.indicator.LinkIndicatorComponent;
 import com.tschm.resonance.components.essence.EssenceStorageVisualizerComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
@@ -25,6 +26,7 @@ import com.tschm.resonance.systems.EchoWandSystems;
 import com.tschm.resonance.systems.EssenceStorageSystems;
 import com.tschm.resonance.systems.LinkIndicatorSystem;
 import com.tschm.resonance.systems.RitualStoneSystems;
+import com.tschm.resonance.systems.functional.HarmonicPulverizerSystems;
 import com.tschm.resonance.systems.functional.ResonantAttractorSystems;
 import com.tschm.resonance.systems.functional.ResonantDisrupterSystems;
 import com.tschm.resonance.systems.generators.CarbonAttunementStoneSystems;
@@ -58,6 +60,7 @@ public class Resonance extends JavaPlugin {
         interactionRegistry.register("ritual_stone_interaction", RitualStoneInteraction.class, RitualStoneInteraction.CODEC);
         interactionRegistry.register("essence_storage_clear", ClearEssenceInteraction.class, ClearEssenceInteraction.CODEC);
         interactionRegistry.register("echo_wand_interaction", EchoWandInteraction.class, EchoWandInteraction.CODEC);
+        interactionRegistry.register("harmonic_pulverizer_interaction", HarmonicPulverizerInteraction.class, HarmonicPulverizerInteraction.CODEC);
 
         this.getEventRegistry().registerGlobal(EventPriority.NORMAL, ChunkPreLoadProcessEvent.class, OreGenChunkEvent::onChunkPreLoadProcess);
 
@@ -75,6 +78,7 @@ public class Resonance extends JavaPlugin {
 
         ResonantDisrupterComponent.setComponentType(regChunk.registerComponent(ResonantDisrupterComponent.class, "Resonance_ResonantDisrupter", ResonantDisrupterComponent.CODEC));
         ResonantAttractorComponent.setComponentType(regChunk.registerComponent(ResonantAttractorComponent.class, "Resonance_ResonantAttractor", ResonantAttractorComponent.CODEC));
+        HarmonicPulverizerComponent.setComponentType(regChunk.registerComponent(HarmonicPulverizerComponent.class, "Resonance_HarmonicPulverizer", HarmonicPulverizerComponent.CODEC));
 
         EchoStorageComponent.setComponentType(regChunk.registerComponent(EchoStorageComponent.class, "Resonance_EchoStorageComponent", EchoStorageComponent.CODEC));
 
@@ -94,6 +98,7 @@ public class Resonance extends JavaPlugin {
 
         regChunk.registerSystem(new ResonantDisrupterSystems.TickingSystem());
         regChunk.registerSystem(new ResonantAttractorSystems.TickingSystem());
+        regChunk.registerSystem(new HarmonicPulverizerSystems.TickingSystem());
 
         regChunk.registerSystem(new EchoStorageSystems.TickingSystem());
     }
