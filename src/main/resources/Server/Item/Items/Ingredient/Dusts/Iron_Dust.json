@@ -1,0 +1,31 @@
+{
+  "Categories": [
+    "Blocks.Ores"
+  ],
+  "DropOnDeath": true,
+  "Icon": "Icons/ItemsGenerated/Dust_WIP.png",
+  "Model": "Items/Dusts/Dust_WIP.blockymodel",
+  "PlayerAnimationsId": "Item",
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ore_Iron"
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Categories": [
+          "Harmonic_Pulverizer_Dusts"
+        ],
+        "Id": "Harmonic_Pulverizer",
+        "Type": "Crafting"
+      }
+    ],
+    "OutputQuantity": 2
+  },
+  "Texture": "Items/Dusts/Dust_WIP.png",
+  "TranslationProperties": {
+    "Name": "items.Iron_Dust.name",
+    "Description": "items.Iron_Dust.description"
+  }
+}

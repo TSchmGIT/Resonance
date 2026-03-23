@@ -1,0 +1,71 @@
+{
+  "Bench": {
+    "Id": "Harmonic_Pulverizer",
+    "Type": "Crafting",
+    "Categories": [
+      {
+        "Id": "Harmonic_Pulverizer_Dusts",
+        "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
+        "Name": "Echo Ingredients"
+      }
+    ]
+  },
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 1000,
+          "MaxReceive": 20,
+          "CanSend": false,
+          "CanReceive": true
+        },
+        "Resonance_HarmonicPulverizer": {}
+      }
+    },
+    "CustomModel": "Blocks/Block_WIP/Model_WIP.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Block_WIP/Texture_WIP.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "harmonic_pulverizer_interaction"
+          }
+        ]
+      }
+    },
+    "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Off": {},
+        "On": {
+          "CustomModelAnimation": "Blocks/Block_WIP/Block_WIP_On.blockyanim",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Block_WIP/Texture_WIP_On.png",
+              "Weight": 1
+            }
+          ],
+          "Looping": true
+        }
+      }
+    },
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Block_WIP.png",
+  "PlayerAnimationsId": "Block",
+  "TranslationProperties": {
+    "Description": "items.Harmonic_Pulverizer.description",
+    "Name": "items.Harmonic_Pulverizer.name"
+  }
+}

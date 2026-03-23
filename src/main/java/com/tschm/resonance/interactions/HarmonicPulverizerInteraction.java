@@ -19,6 +19,7 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.functional.HarmonicPulverizerComponent;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.CraftingHelper;
+import com.tschm.resonance.util.DebugHelper;
 
 import javax.annotation.Nullable;
 import javax.annotation.Nonnull;
@@ -56,12 +57,14 @@ public class HarmonicPulverizerInteraction extends SimpleBlockInteraction {
 
         if (!inputContainer.canAddItemStack(processingItemStack, true, false) ||
                 !heldItemContainer.canRemoveItemStack(processingItemStack)) {
+            DebugHelper.Print("Cannot add item to input container or remove item from held item container");
             ctx.getState().state = InteractionState.Failed;
             return;
         }
 
         CraftingRecipe recipe = CraftingHelper.findMatchingRecipe(BenchType.Crafting, "Harmonic_Pulverizer", itemStack);
         if (recipe == null) {
+            DebugHelper.Print("No matching recipe found for " + itemStack.getItemId());
             ctx.getState().state = InteractionState.Failed;
             return;
         }
@@ -69,6 +72,7 @@ public class HarmonicPulverizerInteraction extends SimpleBlockInteraction {
         // Remove from held item container
         ItemStackTransaction transaction = heldItemContainer.removeItemStack(processingItemStack);
         if (!transaction.succeeded()) {
+            DebugHelper.Print("Failed to remove item from held item container");
             ctx.getState().state = InteractionState.Failed;
             return;
         }
@@ -77,6 +81,7 @@ public class HarmonicPulverizerInteraction extends SimpleBlockInteraction {
         // Systems will handle processing of those items
         transaction = inputContainer.addItemStack(processingItemStack);
         if (!transaction.succeeded()) {
+            DebugHelper.Print("Failed to add item to input container of Harmonic Pulverizer");
             ctx.getState().state = InteractionState.Failed;
             return;
         }

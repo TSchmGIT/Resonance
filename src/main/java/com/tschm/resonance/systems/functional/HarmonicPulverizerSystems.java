@@ -1,10 +1,10 @@
 package com.tschm.resonance.systems.functional;
 
-import com.hypixel.hytale.component.ArchetypeChunk;
-import com.hypixel.hytale.component.CommandBuffer;
-import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
 import com.hypixel.hytale.component.system.tick.EntityTickingSystem;
+import com.hypixel.hytale.math.vector.Vector3f;
+import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.protocol.BenchType;
 import com.hypixel.hytale.server.core.asset.type.item.config.CraftingRecipe;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
@@ -12,9 +12,14 @@ import com.hypixel.hytale.server.core.inventory.MaterialQuantity;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.inventory.transaction.ItemStackSlotTransaction;
 import com.hypixel.hytale.server.core.inventory.transaction.ItemStackTransaction;
+import com.hypixel.hytale.server.core.modules.entity.item.ItemComponent;
+import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.functional.HarmonicPulverizerComponent;
+import com.tschm.resonance.util.BlockHelper;
 import com.tschm.resonance.util.CraftingHelper;
+import com.tschm.resonance.util.SystemsHelper;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 
@@ -35,6 +40,25 @@ public class HarmonicPulverizerSystems {
             } else {
                 startNewOperation(comp);
             }
+
+            Vector3i targetPos = SystemsHelper.getPosForBlock(archetypeChunk, idx, commandBuffer);
+            assert targetPos != null;
+
+            World world = commandBuffer.getExternalData().getWorld();
+            Store<EntityStore> entityStore = world.getEntityStore().getStore();
+            for (short i = (short) 0; i < comp.outputContainer.getCapacity(); ++i) {
+                ItemStack itemStack = comp.outputContainer.getItemStack(i);
+                if (itemStack == null)
+                    continue;
+
+                Holder<EntityStore> holder = ItemComponent.generateItemDrop(entityStore, itemStack, targetPos.toVector3d(), Vector3f.ZERO, 0, 0, 0);
+                if (holder != null)
+                    world.execute(() -> entityStore.addEntity(holder, AddReason.SPAWN));
+            }
+            comp.outputContainer.clear();
+
+            // Block State Update
+            BlockHelper.activateBlockState(isProcessingItem(comp) ? "On" : "Off", commandBuffer.getExternalData().getWorld(), targetPos);
         }
 
         private static boolean isProcessingItem(HarmonicPulverizerComponent comp) {
@@ -53,7 +77,7 @@ public class HarmonicPulverizerSystems {
 
             // Try to move item to output container
             boolean transactionsSucceeded = true;
-            for (MaterialQuantity output : processingRecipe.getOutputs()){
+            for (MaterialQuantity output : processingRecipe.getOutputs()) {
                 ItemStack itemStack = output.toItemStack();
                 if (itemStack == null)
                     continue;
@@ -86,7 +110,7 @@ public class HarmonicPulverizerSystems {
                 if (itemStack == null || itemStack.isEmpty())
                     continue;
 
-                CraftingRecipe recipe =  CraftingHelper.findMatchingRecipe(BenchType.Crafting, "Harmonic_Pulverizer", itemStack);
+                CraftingRecipe recipe = CraftingHelper.findMatchingRecipe(BenchType.Crafting, "Harmonic_Pulverizer", itemStack);
                 if (recipe == null)
                     continue;
 

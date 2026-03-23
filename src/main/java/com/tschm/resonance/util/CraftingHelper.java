@@ -14,8 +14,7 @@ public class CraftingHelper {
         if (inputStack.isEmpty())
             return null;
 
-        // Check if any recipe for Harmonic Pulverizer has the item as one of its input
-        // Recipes might contain more inputs like Resonant Essence (RE) or catalysts
+        // Check if any recipe on the given bench has the item as one of its inputs
         String itemId = inputStack.getItemId();
         for (CraftingRecipe recipe : CraftingPlugin.getBenchRecipes(benchType, benchName)) {
             for (MaterialQuantity input : recipe.getInput()) {
