@@ -1,0 +1,67 @@
+{
+  "BlockType": {
+    "BlockEntity": {
+      "Components": {
+        "Resonance_EssenceStorage": {
+          "MaxEssence": 2000,
+          "MaxReceive": 40,
+          "CanSend": false,
+          "CanReceive": true
+        },
+        "Resonance_EchoConjurer": {
+          "NpcIds": [
+            "Chicken",
+            "Chicken_Desert",
+            "Chicken_Chick"
+          ]
+        }
+      }
+    },
+    "CustomModel": "Blocks/Block_WIP/Model_WIP.blockymodel",
+    "CustomModelTexture": [
+      {
+        "Texture": "Blocks/Block_WIP/Texture_WIP.png",
+        "Weight": 1
+      }
+    ],
+    "DrawType": "Model",
+    "Gathering": {
+      "Breaking": {
+        "GatherType": "Soils"
+      }
+    },
+    "HitboxType": "WIP_Block_Hitbox",
+    "Interactions": {
+      "Use": {
+        "Interactions": [
+          {
+            "Type": "echo_conjurer_interaction"
+          }
+        ]
+      }
+    },
+    "Material": "Solid",
+    "State": {
+      "Definitions": {
+        "Off": {},
+        "On": {
+          "CustomModelAnimation": "Blocks/Block_WIP/Block_WIP_On.blockyanim",
+          "CustomModelTexture": [
+            {
+              "Texture": "Blocks/Block_WIP/Texture_WIP_On.png",
+              "Weight": 1
+            }
+          ],
+          "Looping": true
+        }
+      }
+    },
+    "VariantRotation": "NESW"
+  },
+  "Icon": "Icons/ItemsGenerated/Block_WIP.png",
+  "PlayerAnimationsId": "Block",
+  "TranslationProperties": {
+    "Description": "items.Echo_Conjurer.description",
+    "Name": "items.Echo_Conjurer.name"
+  }
+}

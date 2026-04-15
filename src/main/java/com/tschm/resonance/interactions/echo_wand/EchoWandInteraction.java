@@ -14,6 +14,7 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
+import com.tschm.resonance.components.functional.EchoConjurerComponent;
 import com.tschm.resonance.components.functional.HarmonicProcessorComponent;
 import com.tschm.resonance.components.storage.EchoStorageComponent;
 import com.tschm.resonance.interactions.echo_wand.handler.*;
@@ -41,11 +42,13 @@ public class EchoWandInteraction extends SimpleBlockInteraction {
             @Nullable EssenceStorageComponent essenceStorage,
             @Nullable EchoStorageComponent echoStorage,
             @Nullable ItemContainerBlock itemContainer,
-            @Nullable HarmonicProcessorComponent harmonicProcessor) {
+            @Nullable HarmonicProcessorComponent harmonicProcessor,
+            @Nullable EchoConjurerComponent echoConjurer) {
     }
 
     private static final List<WandInteractionHandler> HANDLERS = List.of(
             new HarmonicProcessorHandler(),
+            new EchoConjurerHandler(),
             new EssenceStorageHandler(),
             new EchoStorageHandler()
     );
@@ -70,11 +73,12 @@ public class EchoWandInteraction extends SimpleBlockInteraction {
                 ComponentHelper.findComponentAt(world, targetPos, EssenceStorageComponent.getComponentType()),
                 ComponentHelper.findComponentAt(world, targetPos, EchoStorageComponent.getComponentType()),
                 ComponentHelper.findComponentAt(world, targetPos, ItemContainerBlock.getComponentType()),
-                ComponentHelper.findComponentAt(world, targetPos, HarmonicProcessorComponent.getComponentType()));
+                ComponentHelper.findComponentAt(world, targetPos, HarmonicProcessorComponent.getComponentType()),
+                ComponentHelper.findComponentAt(world, targetPos, EchoConjurerComponent.getComponentType()));
 
         if (target.generator() == null && target.essenceStorage() == null
                 && target.echoStorage() == null && target.itemContainer() == null
-                && target.harmonicProcessor() == null)
+                && target.harmonicProcessor() == null && target.echoConjurer() == null)
             return;
 
         EchoWandMetaData metaData = itemStack.getFromMetadataOrDefault("EchoWandMetaData", EchoWandMetaData.CODEC);

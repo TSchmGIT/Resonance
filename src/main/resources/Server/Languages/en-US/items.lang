@@ -42,3 +42,7 @@ Harmonic_Pulverizer.name = Harmonic Pulverizer
 Harmonic_Pulverizer.description = Crushes ores to dust using RE
 Harmonic_Reconstructor.name = Harmonic Reconstructor
 Harmonic_Reconstructor.description = Reconstructs dusts into ingots using RE
+
+# Echo Conjurer
+Echo_Conjurer.name = Echo Conjurer
+Echo_Conjurer.description = Summons NPCs from Life Essence and RE
