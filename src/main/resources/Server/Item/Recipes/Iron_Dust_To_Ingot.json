@@ -1,0 +1,17 @@
+{
+  "Input": [
+    {
+      "ItemId": "Iron_Dust"
+    }
+  ],
+  "PrimaryOutput": {
+    "ItemId": "Ingredient_Bar_Iron"
+  },
+  "BenchRequirement": [
+    {
+      "Type": "Crafting",
+      "Id": "Harmonic_Reconstructor",
+      "Category": "Harmonic_Reconstructor_Ingots"
+    }
+  ]
+}

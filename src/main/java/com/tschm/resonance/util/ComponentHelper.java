@@ -1,19 +1,14 @@
 package com.tschm.resonance.util;
 
-import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.component.Ref;
-import com.hypixel.hytale.math.block.BlockCubeUtil;
 import com.hypixel.hytale.math.util.ChunkUtil;
 import com.hypixel.hytale.math.vector.Vector3i;
-import com.hypixel.hytale.server.core.asset.type.blocktype.config.BlockType;
-import com.hypixel.hytale.server.core.modules.block.BlockModule;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.WorldProvider;
 import com.hypixel.hytale.server.core.universe.world.chunk.BlockComponentChunk;
 import com.hypixel.hytale.server.core.universe.world.chunk.WorldChunk;
-import com.hypixel.hytale.server.core.universe.world.meta.BlockState;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.generators.CarbonAttunementStoneComponent;
@@ -74,13 +69,5 @@ public class ComponentHelper {
         comp = comp != null ? comp : blockComponentChunk.getComponent(blockIndexColumn, VerdantAttunementStoneComponent.getComponentType());
 
         return comp;
-    }
-
-    @Deprecated(forRemoval = true)
-    @Nullable
-    public static <T extends BlockState> T findBlockStateAt(@Nonnull World world, @Nonnull Vector3i pos, Class<T> type) {
-        WorldChunk worldChunk = world.getChunk(ChunkUtil.indexChunkFromBlock(pos.x, pos.z));
-        BlockState blockState = worldChunk != null ? worldChunk.getState(pos.x, pos.y, pos.z) : null;
-        return type.isInstance(blockState) ? type.cast(blockState) : null;
     }
 }

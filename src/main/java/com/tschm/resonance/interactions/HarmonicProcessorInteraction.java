@@ -16,7 +16,7 @@ import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHa
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.client.SimpleBlockInteraction;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.tschm.resonance.components.functional.HarmonicPulverizerComponent;
+import com.tschm.resonance.components.functional.HarmonicProcessorComponent;
 import com.tschm.resonance.util.ComponentHelper;
 import com.tschm.resonance.util.CraftingHelper;
 import com.tschm.resonance.util.DebugHelper;
@@ -24,9 +24,9 @@ import com.tschm.resonance.util.DebugHelper;
 import javax.annotation.Nullable;
 import javax.annotation.Nonnull;
 
-public class HarmonicPulverizerInteraction extends SimpleBlockInteraction {
-    public static final BuilderCodec<HarmonicPulverizerInteraction> CODEC = BuilderCodec.builder(
-            HarmonicPulverizerInteraction.class, HarmonicPulverizerInteraction::new, SimpleBlockInteraction.CODEC
+public class HarmonicProcessorInteraction extends SimpleBlockInteraction {
+    public static final BuilderCodec<HarmonicProcessorInteraction> CODEC = BuilderCodec.builder(
+            HarmonicProcessorInteraction.class, HarmonicProcessorInteraction::new, SimpleBlockInteraction.CODEC
     ).build();
 
     @Override
@@ -44,7 +44,7 @@ public class HarmonicPulverizerInteraction extends SimpleBlockInteraction {
             return;
         }
 
-        var comp = ComponentHelper.findComponentAt(world, targetBlock, HarmonicPulverizerComponent.getComponentType());
+        var comp = ComponentHelper.findComponentAt(world, targetBlock, HarmonicProcessorComponent.getComponentType());
         if (comp == null) {
             ctx.getState().state = InteractionState.Failed;
             return;

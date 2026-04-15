@@ -9,8 +9,8 @@ import com.hypixel.hytale.math.vector.Vector3i;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.inventory.transaction.ItemStackTransaction;
+import com.hypixel.hytale.server.core.modules.block.components.ItemContainerBlock;
 import com.hypixel.hytale.server.core.universe.world.World;
-import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerState;
 import com.hypixel.hytale.server.core.universe.world.storage.ChunkStore;
 import com.tschm.resonance.components.storage.EchoStorageComponent;
 import com.tschm.resonance.util.ComponentHelper;
@@ -96,7 +96,7 @@ public class EchoStorageSystems {
             if (echoStorageComponent != null)
                 return echoStorageComponent.inventory;
 
-            ItemContainerState itemContainerState = ComponentHelper.findBlockStateAt(world, pos, ItemContainerState.class);
+            ItemContainerBlock itemContainerState = ComponentHelper.findComponentAt(world, pos, ItemContainerBlock.getComponentType());
             if (itemContainerState != null)
                 return itemContainerState.getItemContainer();
 
