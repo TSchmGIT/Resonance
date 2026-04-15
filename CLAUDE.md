@@ -1,4 +1,4 @@
-# CLAUDE.md
+﻿# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -9,6 +9,33 @@ mvn -q -DskipTests package
 ```
 
 Output: `target/Resonance-0.0.3.jar` (Java 25, Maven). No tests are defined. Drop the JAR into the Hytale server's `plugins/` directory.
+
+## Hytale Server Reference Source (Decompiled)
+
+**Location:** Configured as an additional directory in `.claude/settings.json`
+
+This is the **official decompiled `HytaleServer.jar`** — use it as a read-only reference to understand Hytale's internal APIs, conventions, and patterns before implementing anything.
+
+### Critical: Decompilation Limitations
+- **Do not attempt to fix or edit this source** — it is reference material only
+- **It will not compile** — decompiler artifacts are expected and normal
+- Broken lambda reconstructions, synthetic accessors, and `// $FF:` comments can be ignored
+- Auto-generated variable names (`var1`, `param0`, `i`) are unreliable — focus on method signatures and class structure instead
+
+### What to Trust
+| Reliable | Unreliable |
+|---|---|
+| Class/interface names and package layout | Method bodies with decompiler artifacts |
+| Field names, types, and annotations | Reconstructed lambdas and switch expressions |
+| Method signatures and return types | Synthetic inner class accessors |
+| Interface hierarchies and generics | Auto-named local variables |
+
+### How to Use It
+When implementing a new feature in Resonance:
+1. Search the reference source for how Hytale handles the same or similar logic
+2. Prefer Hytale's own patterns and naming conventions over generic Java idioms
+3. If a method body is unreadable, the class structure, field types, and method signatures are still valid
+4. Cross-reference with what is already established in this mod (see Architecture above)
 
 ## Architecture
 

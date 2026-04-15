@@ -74,7 +74,7 @@ public class SystemsHelper {
      */
     @Nonnull
     public static List<Ref<EntityStore>> getItemsInRange(@Nonnull Store<EntityStore> entityStore, Vector3d worldPos, double range) {
-        ObjectList<Ref<EntityStore>> results = SpatialResource.getThreadLocalReferenceList();
+        List<Ref<EntityStore>> results = SpatialResource.getThreadLocalReferenceList();
         SpatialResource<Ref<EntityStore>, EntityStore> itemSpatialResource = entityStore.getResource(EntityModule.get().getItemSpatialResourceType());
         itemSpatialResource.getSpatialStructure().collect(worldPos, range, results);
         return results;

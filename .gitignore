@@ -5,6 +5,7 @@ hytale-server/
 !**/src/test/**/target/
 /src/main/storage/
 /src/main/misc/
+doc/*
 
 ### IntelliJ IDEA ###
 .idea/*

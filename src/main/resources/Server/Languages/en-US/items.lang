@@ -32,9 +32,13 @@ Resonant_Disruptor.name = Resonant Disruptor
 Resonant_Disruptor.description = Damages nearby blocks (i.e tree trunks)
 Resonant_Attractor.name = Resonant Attractor
 Resonant_Attractor.description = Sucks in nearby item like a magnet
-Harmonic_Pulverizer.name = Harmonic Pulverizer
-Harmonic_Pulverizer.description = Crushes ores to dust using RE
 
 # Dusts
 Iron_Dust.name = Iron Dust
 Iron_Dust.description = Can be smelted to Iron Ingot
+
+# Harmonic Processor
+Harmonic_Pulverizer.name = Harmonic Pulverizer
+Harmonic_Pulverizer.description = Crushes ores to dust using RE
+Harmonic_Reconstructor.name = Harmonic Reconstructor
+Harmonic_Reconstructor.description = Reconstructs dusts into ingots using RE

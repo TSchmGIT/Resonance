@@ -7,13 +7,14 @@ import com.hypixel.hytale.protocol.InteractionType;
 import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
+import com.hypixel.hytale.server.core.modules.block.components.ItemContainerBlock;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.CooldownHandler;
 import com.hypixel.hytale.server.core.modules.interaction.interaction.config.client.SimpleBlockInteraction;
 import com.hypixel.hytale.server.core.universe.world.World;
-import com.hypixel.hytale.server.core.universe.world.meta.state.ItemContainerState;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.essence.EssenceGeneratorComponent;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
+import com.tschm.resonance.components.functional.HarmonicProcessorComponent;
 import com.tschm.resonance.components.storage.EchoStorageComponent;
 import com.tschm.resonance.interactions.echo_wand.handler.*;
 import com.tschm.resonance.metadata.EchoWandMetaData;
@@ -39,10 +40,12 @@ public class EchoWandInteraction extends SimpleBlockInteraction {
             @Nullable EssenceGeneratorComponent generator,
             @Nullable EssenceStorageComponent essenceStorage,
             @Nullable EchoStorageComponent echoStorage,
-            @Nullable ItemContainerState itemContainer) {
+            @Nullable ItemContainerBlock itemContainer,
+            @Nullable HarmonicProcessorComponent harmonicProcessor) {
     }
 
     private static final List<WandInteractionHandler> HANDLERS = List.of(
+            new HarmonicProcessorHandler(),
             new EssenceStorageHandler(),
             new EchoStorageHandler()
     );
@@ -66,10 +69,12 @@ public class EchoWandInteraction extends SimpleBlockInteraction {
                 ComponentHelper.findGeneratorComponentAt(world, targetPos),
                 ComponentHelper.findComponentAt(world, targetPos, EssenceStorageComponent.getComponentType()),
                 ComponentHelper.findComponentAt(world, targetPos, EchoStorageComponent.getComponentType()),
-                ComponentHelper.findBlockStateAt(world, targetPos, ItemContainerState.class));
+                ComponentHelper.findComponentAt(world, targetPos, ItemContainerBlock.getComponentType()),
+                ComponentHelper.findComponentAt(world, targetPos, HarmonicProcessorComponent.getComponentType()));
 
         if (target.generator() == null && target.essenceStorage() == null
-                && target.echoStorage() == null && target.itemContainer() == null)
+                && target.echoStorage() == null && target.itemContainer() == null
+                && target.harmonicProcessor() == null)
             return;
 
         EchoWandMetaData metaData = itemStack.getFromMetadataOrDefault("EchoWandMetaData", EchoWandMetaData.CODEC);
@@ -79,12 +84,13 @@ public class EchoWandInteraction extends SimpleBlockInteraction {
             if (!handler.isApplicable(target))
                 continue;
 
-            Optional<String> result = handler.handle(world, targetPos, metaData, target, commandBuffer);
+            Optional<String> result = handler.handle(world, targetPos, metaData, target, commandBuffer, context);
             if (result.isEmpty()) {
                 lastError = null;
                 break;
             }
             lastError = result.get();
+            DebugHelper.Print(lastError);
         }
 
         if (lastError != null) {

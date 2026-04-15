@@ -2,6 +2,7 @@ package com.tschm.resonance.interactions.echo_wand.handler;
 
 import com.hypixel.hytale.component.CommandBuffer;
 import com.hypixel.hytale.math.vector.Vector3i;
+import com.hypixel.hytale.server.core.entity.InteractionContext;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.tschm.resonance.components.essence.EssenceStorageComponent;
@@ -27,7 +28,7 @@ public class EssenceStorageHandler implements WandInteractionHandler {
     }
 
     @Override
-    public Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target, CommandBuffer<EntityStore> commandBuffer) {
+    public Optional<String> handle(World world, Vector3i targetPos, EchoWandMetaData metaData, EchoWandInteraction.WandTarget target, CommandBuffer<EntityStore> commandBuffer, InteractionContext context) {
         EssenceStorageComponent compStorage = target.essenceStorage();
         assert compStorage != null;
 

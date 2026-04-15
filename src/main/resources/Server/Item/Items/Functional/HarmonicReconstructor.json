@@ -1,13 +1,13 @@
 {
   "BlockType": {
     "Bench": {
-      "Id": "Harmonic_Pulverizer",
+      "Id": "Harmonic_Reconstructor",
       "Type": "Crafting",
       "Categories": [
         {
-          "Id": "Harmonic_Pulverizer_Dusts",
+          "Id": "Harmonic_Reconstructor_Ingots",
           "Icon": "Icons/CraftingCategories/Workbench/WeaponsCrude.png",
-          "Name": "Echo Ingredients"
+          "Name": "Reconstructed Ingots"
         }
       ]
     },
@@ -66,7 +66,7 @@
   "Icon": "Icons/ItemsGenerated/Block_WIP.png",
   "PlayerAnimationsId": "Block",
   "TranslationProperties": {
-    "Description": "items.Harmonic_Pulverizer.description",
-    "Name": "items.Harmonic_Pulverizer.name"
+    "Description": "items.Harmonic_Reconstructor.description",
+    "Name": "items.Harmonic_Reconstructor.name"
   }
 }

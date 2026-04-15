@@ -105,6 +105,8 @@ public class ItemHelper {
             return null;
         } else {
             ModelAsset modelasset = ModelAsset.getAssetMap().getAsset(s);
+            if (modelasset == null)
+                DebugHelper.PrintOnce("item_model_null_" + s, "ItemHelper: ModelAsset not found for model ID: " + s);
             return modelasset != null ? Model.createStaticScaledModel(modelasset, 0.5F) : null;
         }
     }
@@ -200,6 +202,8 @@ public class ItemHelper {
             }
 
             store.addEntity(holder, AddReason.SPAWN);
+        } else {
+            DebugHelper.PrintOnce("spawn_item_drop_fail", "ItemHelper: generateItemDrop returned null for " + stack.getItemId());
         }
     }
 }
