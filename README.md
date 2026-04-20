@@ -1,58 +1,72 @@
-﻿> Disclaimer: This README is work in progress and might not reflect the current state of the mod
 # Resonance
 
-Resonance is a Hytale server mod focused on the mystery of Echos. It adds a new Echo ore, ritual crafting, and a small toolkit that lets you manipulate Echo materials through a custom block interaction.
+**Resonance** is a Hytale server mod centered around mystical automation powered by Echoes and Resonant Essence (RE). It starts with ore mining and ritual crafting, then grows into a small network of generators, storage, and utility blocks you can wire together with the **Echo Wand**.
 
-## Current Features
-- Echo Stone ore generation in multiple rock types.
-- Echo Shards as a primary material drop.
-- Ritual Stone crafting station with custom interaction logic.
-- Echo Wand to trigger ritual crafting.
-- In-world preview items that sit on the Ritual Stone while crafting inputs are loaded.
+If you like mods where progression moves from "find rare stuff" to "build smart systems," Resonance is built for that style.
 
-## Content Added
-Items and blocks currently defined by the mod:
-- Echo Stone (ore block)
-- Echo Shard (material)
-- Echo Wand (ritual trigger item)
-- Ritual Stone (crafting block)
-- Echo Dummy Item (dev/test item)
+## What You Can Do
 
-## Gameplay Flow
-1) Mine Echo Stone to obtain Echo Shards.
-2) Craft a Ritual Stone at a normal workbench.
-3) Place the Ritual Stone and insert up to three items (main + two catalysts).
-4) Use the Echo Wand to perform the ritual and produce the matching recipe output.
+### 1) Discover and Mine Echo Stone
+- Echo Stone is injected into worldgen for newly generated chunks.
+- It can appear in stone, basalt, sandstone, shale, and volcanic rock layers.
+- Mining Echo Stone yields **Echo Shards** (plus cobble), which are your starter material.
 
-The Ritual Stone previews inserted items as static world entities. Empty-hand interaction removes the most recently inserted item. Breaking the Ritual Stone drops any stored items.
+### 2) Build a Ritual-Crafting Setup
+- Craft a **Ritual Stone** at a regular Workbench.
+- Place up to **three inputs** on the Ritual Stone (main + two catalyst slots).
+- Use the **Echo Wand** to trigger ritual crafting.
+- Inserted items are previewed as in-world entities, and stored items are safely dropped if the Ritual Stone is broken.
 
-## World Generation
-Echo Stone replaces common rock variants (stone, basalt, sandstone, shale, volcanic) during chunk generation. Generation runs in new chunks only and targets sections that overlap Y 20 to Y 110, with a low density pass.
+### 3) Craft Echo Materials and Tools
+Ritual recipes are grouped into bench categories:
+- **Echo Ingredients** (e.g., Essence of Echo, Echo of Power, Echo of Swiftness)
+- **Echo Items** (e.g., Resonant Pickaxe)
+- **Echo Storage** (e.g., Resonant Vessel)
+- **Echo Generator** (attunement stones and utility blocks)
 
-## Crafting
-Ritual Stone:
-- 8x Echo Shard
-- 10x Rock_Stone (resource type)
-- 5x Rock (resource type)
-- Bench: Workbench (standard crafting)
+### 4) Generate, Store, and Route Resonant Essence
+Resonance includes an RE infrastructure layer:
+- **Solar Attunement Stone**: passive essence generation over time.
+- **Carbon Attunement Stone**: burns fuel-like inputs to generate essence.
+- **Resonant Vessel**: high-capacity essence storage with visual fill levels.
+- **Echo Wand bindings**: bind generators to storage, and bind compatible echo-storage blocks together.
 
-Ritual Stone recipes are pulled from the Ritual Stone bench category. The Echo Dummy Item is an example/test recipe wired to this bench.
+### 5) Automate Utility Actions
+- **Resonant Attractor** pulls nearby dropped items toward itself.
+- **Resonant Disruptor** repeatedly damages harvestable blocks in an area, consuming essence as it works.
+- **Resonant Pickaxe** is included in progression and described in-game as a 3x3 mining tool.
+
+## Current Content Snapshot
+The repo currently includes definitions, assets, and logic for:
+- Echo Stone, Echo Shard, Echo Wand
+- Ritual Stone
+- Essence of Echo, Echo of Swiftness, Echo of Power
+- Basic / Solar / Carbon / Verdant Attunement Stones
+- Resonant Vessel
+- Resonant Attractor
+- Resonant Disruptor
+- Resonant Pickaxe
+
+> Note: Verdant Attunement Stone is marked `[NYI]` in localization and does not appear to be wired into active ticking systems yet.
+
+## Gameplay Loop (Quick Version)
+1. Mine **Echo Stone** for **Echo Shards**.
+2. Craft and place a **Ritual Stone**.
+3. Use ritual recipes to make **Essence of Echo** and advanced components.
+4. Place generators + storage, then bind them with the **Echo Wand**.
+5. Expand into utility automation (attraction/disruption) and higher-tier tools.
 
 ## Technical Notes
-- Core interaction logic: `src/main/java/com/tschm/resonance/interactions/RitualStoneInteraction.java`
-- Ritual Stone storage: `src/main/java/com/tschm/resonance/components/RitualStoneComponent.java`
-- Ore generation: `src/main/java/com/tschm/resonance/worldgen/OreGenerator.java`
+- Plugin entry: `com.tschm.resonance.Resonance`
+- Manifest description: **Mystical fantasy automation mod**
+- Includes asset pack resources (models, textures, animations, language)
 
 ## Building
-This project uses Maven. Build with:
-```powershell
+This project uses Maven:
+
+```bash
 mvn -q -DskipTests package
 ```
 
-The mod includes an asset pack and a filtered `manifest.json`.
-
 ## License
-MIT. See `LICENSE`.
-
-## Credits
-- Some item entity utility logic is adapted from Mrbysco/ItemFrames (credited in code comments).
+MIT. See [LICENSE](LICENSE).
